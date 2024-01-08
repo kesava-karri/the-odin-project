@@ -1,0 +1,22 @@
+/* Descendant combinator */
+div .text {
+  font-weight: bold;
+}
+
+/* ID selector */
+#unique {
+  text-align: center;
+}
+
+/* Class Selector */
+.hello {
+  font-weight: bold;
+}
+/* Type (Element) Selector */
+div {
+  color: white;
+}
+/* Universal Selector */
+* {
+  color: purple;
+}
