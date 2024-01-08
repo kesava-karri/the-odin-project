@@ -1,0 +1,7 @@
+/* Descendant combinator */
+.container p {
+  background-color: rgb(255, 255, 0);
+  color: hsl(0, 100%, 45%);
+  text-align: center;
+  font-size: 18px;
+}
