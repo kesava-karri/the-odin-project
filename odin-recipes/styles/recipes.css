@@ -1,0 +1,16 @@
+body {
+  background-color: lightgray;
+}
+
+h1 {
+  font-family: "Courier New", serif;
+  font-weight: 400;
+  font-size: 40px;
+  text-align: center;
+}
+
+h2, 
+h3 {
+  text-align: left;
+  background-color: rgb(119, 225, 103);
+}
