@@ -11,6 +11,13 @@ h1 {
 
 h2, 
 h3 {
-  text-align: left;
+  text-align: center;
   background-color: rgb(119, 225, 103);
+
+}
+
+.image {
+  display: block;
+  margin: 0 auto;
+  width: 50%;
 }
