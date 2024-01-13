@@ -64,6 +64,7 @@ a {
   width: 400px;
   height: auto;
   flex: 2;
+  margin-left: 40px;
 }
 
 button {
@@ -171,4 +172,11 @@ button {
 .signup-text {
   margin: 0;
   color: #E5E7EB;
+}
+
+.footer {
+  background-color:#1F2937;
+  color: #c5c7cb;
+  text-align: center;
+  padding: 20px;
 }
