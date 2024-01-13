@@ -35,8 +35,6 @@ body {
 
 .hero-text container {
   display: flex;
-  /* flex-direction: column; */
-  /* flex-basis: 0; */
   flex: 0.5;
 }
 
@@ -68,12 +66,13 @@ a {
   flex: 2;
 }
 
-.container > button {
+button {
   background-color: #3882F6;
   border-radius: 6px;
-  padding: 5px 20px;
+  padding: 10px 30px;
   color: #F9FAF8;
   border: 0px;
+  font-size: 18px;
 }
 
 .container > p {
@@ -105,13 +104,71 @@ a {
   width: 150px;
 }
 
-.mid-container > h2 {
+.mid-container > .info {
   text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+  color: #1F2937;
 }
 
 .images p {
   margin-top: 5px;
   text-align: center;
+  color: #615c57;
 }
 
+.last-but-one {
+  background-color: #E5E7EB;
+  padding: 0 300px 100px;
+}
 
+.last-but-one .text {
+  font-size: 36px;
+  font-weight: 100;
+  font-style: italic;
+  margin-bottom: 0;
+  padding-top: 60px;
+  color: rgb(199, 140, 140);
+}
+
+.last-but-one .author {
+  font-size: 24px;
+  text-align: end;
+  font-weight: 900;
+  margin: 0;
+  padding-right: 30px;
+}
+
+.bottom-container {
+  background-color: #3882F6;
+  margin: 100px auto;
+  width: 1015px;
+  height: 140px;
+  display: flex;
+  justify-content: space-around;
+  border-radius: 10px;
+}
+
+.bottom-container > button {
+  border: 2px solid #F9FAF8;
+  padding: 10px 30px;
+  margin: auto 0;
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.bottom-container > .text {
+  margin: auto 0;
+}
+
+.call {
+  color: #F9FAF8;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.signup-text {
+  margin: 0;
+  color: #E5E7EB;
+}
