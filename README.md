@@ -3,3 +3,4 @@
 #### Skills Demonstrated
 - HTML
 - CSS
+- JavaScript
