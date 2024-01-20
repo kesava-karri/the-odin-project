@@ -7,12 +7,11 @@ function getComputerChoice() {
 function playRound(playerSelection, computerSelection) {
   let player = playerSelection.toLowerCase();
   let computer = computerSelection.toLowerCase();
-
   if (player === computer) {
     return "That's a tie";
   } else {
     if ((player === "rock" && computer === "scissors")
-      || (player === "paper" && computer == "rock")
+      || (player === "paper" && computer === "rock")
       || (player === "scissors" && computer === "rock")) {
       return `You Win! ${playerSelection} beats ${computerSelection}`;
     } else {
@@ -21,26 +20,61 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-function game() {
-  let playerScore = 0;
-  let computerScore = 0;
-  
-  for (let i = 0; i < 5; i++) {
-    const playerSelection = prompt("Make your play from the options rock, paper, scissors [case-insensitive]: ");
-    const computerSelection = getComputerChoice();
+let playerScore = 0;
+let computerScore = 0;
 
-    result = playRound(playerSelection, computerSelection);
-    console.log(result);
-    alert(result);
-    if (result.includes("Win!")) playerScore++;
-    else if (result.includes("Lose!")) computerScore++;
-  }
-  const winner = () => {
-    if (playerScore > computerScore) return "You";
-    else if (computerScore > playerScore) return "Computer";
-    else return "That's a tie";
-  }
-  return `The winner of this best-of-five game: ${winner()}`;
+function game(result, playerScore, computerScore) {
+  if (result.includes("Win!")) playerScore++;
+  else if (result.includes("Lose!")) computerScore++;
+  return [playerScore, computerScore];
 }
 
-alert(game());
+const container = document.createElement("div");
+const rock = document.createElement("button");
+const paper = document.createElement("button");
+const scissors = document.createElement("button");
+
+rock.textContent = "Rock";
+paper.textContent = "Paper";
+scissors.textContent = "Scissors";
+
+rock.style.cssText = "padding: 5px 10px; margin: 0px 5px; background-color: grey;";
+paper.style.cssText = "padding: 5px 10px; margin: 0px 5px; background-color: white;";
+scissors.style.cssText = "padding: 5px 10px; margin: 0px 5px; background-color: lightgray;";
+
+
+
+container.appendChild(rock);
+container.appendChild(paper);
+container.appendChild(scissors);
+
+document.body.appendChild(container);
+
+const buttons = document.querySelectorAll("button");
+
+const div = document.createElement("div");
+div.className = "result";
+document.body.appendChild(div);
+
+let result;
+
+buttons.forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    const div = document.querySelector(".result");
+    result = playRound(e.target.textContent, getComputerChoice());
+    div.textContent = result;
+
+    [playerScore, computerScore] = game(result, playerScore, computerScore);
+
+    if (playerScore >= 5 || computerScore >= 5) {
+      const winner = playerScore > computerScore ? "You" : "Computer"
+      alert(`The winner of this game is: ${winner}`);
+    }
+  });
+});
+
+div.style.cssText = "display: flex; color: red; justify-content: center;";
+div.style.cssText += "margin-top: 10px; font-family: monospace;"
+
+container.style.cssText = "display: flex; justify-content: center; align-items: center";
+container.style.cssText += "padding-top: 250px; ";
