@@ -1,0 +1,40 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.gridContainer {
+  border: 2px solid #faa12d;
+  display: flex; 
+  flex-wrap: wrap;
+  width: 800px;
+  height: 700px;
+  border: 2px;
+  box-shadow: 5px 5px 12px lightgreen;
+  border-radius: 10px;
+}
+
+.innerSquare {
+  display: flex;
+  border-radius: 1px;
+}
+
+.heading {
+  text-align: center;
+}
+
+.btn {
+  margin-bottom: 10px;
+  border-radius: 15px;
+  padding: 10px;
+  color: rgb(234, 234, 238);
+  background-color: #3882F6;
+  box-shadow: 1px 1px 1px #3882F6;
+  font-size: 15px;
+}
+
+.mouseover {
+  background-color: #1ba3f2;
+}
