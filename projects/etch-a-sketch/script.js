@@ -42,7 +42,7 @@ btn.onclick = () => {
   );
   if (numOfSquares <= 0 || numOfSquares > 100) {
     numOfSquares = Number(
-      prompt("Choose from the inlcusive limit  [1, 100] :), please re-enter")
+      prompt("Choose from the inclusive limit  [1, 100] :), please re-enter")
     );
   }
   // Remove the existing squares :)
