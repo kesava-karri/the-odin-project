@@ -1,0 +1,45 @@
+body {
+  background-color: lightgray;
+}
+
+h1 {
+  text-align: center;
+}
+
+.mainContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.operator {
+  /* font-size: 25px; */
+}
+
+.numbers {
+  display: flex;
+  flex-wrap: wrap;
+  width: 152px;
+  height: auto;
+  justify-content: center;
+}
+
+.btn {
+  margin: 2px 5px;
+  width: 40px;
+  height: auto;
+  font-size: large;
+}
+
+.operatorsContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.calc {
+  display: flex;
+  margin: 10px;
+}
+
+.btn-clear {
+  padding-left: 0px;
+}
