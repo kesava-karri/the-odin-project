@@ -14,24 +14,22 @@ const multiply = (a, b) => a * b;
 // rounded divided upto 2 decimal points
 const divide = (a, b) => Math.floor(a/b * 100) / 100;
 
-const input1 = document.createElement("input");
-input1.classList.add("input1");
-input1.placeholder = 2;
-container.appendChild(input1);
+const display = document.createElement("div");
+const currEvalDisplay = document.createElement("div");
+const numberDisplay = document.createElement("div");
 
-const input2 = document.createElement("input");
-input2.classList.add("input2");
-input2.placeholder = 3;
-container.appendChild(input2);
-
-// TODO: Change operator
-// hard coding operator for now
-const operator = document.createElement("p");
-operator.classList.add("operator");
-operator.textContent = "+";
-container.insertBefore(operator, input2);
+currEvalDisplay.textContent = "0";
+display.classList.add("display");
+numberDisplay.textContent = "0";
+container.appendChild(display);
+display.appendChild(currEvalDisplay);
+display.appendChild(numberDisplay);
 
 const operate = (operator, num1, num2) => {
+  // Convert strings to numbers
+  num1 = Number(num1);
+  num2 = +num2;
+
   switch (operator) {
     case OPERATORS[0]: // "+"
       return add(num1, num2);
@@ -44,10 +42,15 @@ const operate = (operator, num1, num2) => {
   }
 }
 
+let num1 = "";
+let num2 = "";
+let displayVal = 0;
+
 const calc = document.createElement("div");
 calc.classList.add("calc");
 const numbers = document.createElement("div");
 numbers.classList.add("numbers");
+container.appendChild(calc);
 
 // Create buttons for 1 to 9
 for (let i = 1; i <= 9; i++) {
@@ -57,7 +60,12 @@ for (let i = 1; i <= 9; i++) {
   numbers.appendChild(btn);
 
   btn.addEventListener('click', (e) => {
-    input1.value += btn.textContent;
+    if (numberDisplay.textContent === "0") {
+      if (!num1 || !num2 || !operator) {
+        numberDisplay.textContent = "";
+      }
+    }
+    numberDisplay.textContent += e.target.textContent;
   });
 }
 
@@ -67,22 +75,47 @@ btnClear.classList.add("btn");
 btnClear.classList.add("btn-clear");
 btnClear.textContent = "CLR";
 numbers.appendChild(btnClear);
+btnClear.addEventListener('click', () => {
+  numberDisplay.textContent = "0";
+  currEvalDisplay.textContent = "0";
+  num1 = "";
+  num2 = "";
+  operator = "";
+});
 
-// Button 0 to place it at the bottom
+// Button 0; not included in the loop to place it at the bottom
 const btn = document.createElement("button");
 btn.classList.add("btn");
 btn.classList.add("btn-zero");
 btn.textContent = 0;
 numbers.appendChild(btn);
 calc.appendChild(numbers);
-document.body.appendChild(calc);
+btn.addEventListener('click', (e) => {
+  numberDisplay.textContent += e.target.textContent;
+  currEvalDisplay.textContent = numberDisplay.textContent;
+});
 
 // Equal sign
 const btnEquals = document.createElement("button");
 btnEquals.classList.add("btn");
 btnEquals.textContent = OPERATORS[4];
 numbers.appendChild(btnEquals);
+btnEquals.addEventListener('click', () => {
+  if (num1 && !num2) {
+    num2 = numberDisplay.textContent;
+    currEvalDisplay.textContent = numberDisplay.textContent;
+  }
+  if (operator && num1 && num2) {
+    numberDisplay.textContent = operate(operator, num1, num2);
+    currEvalDisplay.textContent = numberDisplay.textContent;
+    num1 = "";
+    num2 = "";
+    operator = "";
+  }
+});
 
+// Operations
+let operator = "";
 const operatorsContainer = document.createElement("div");
 operatorsContainer.classList.add("operatorsContainer");
 for (let i = 0; i < 4; i++) {
@@ -90,5 +123,26 @@ for (let i = 0; i < 4; i++) {
   btn.textContent = OPERATORS[i];
   btn.classList.add("btn");
   operatorsContainer.appendChild(btn);
+
+  btn.addEventListener('click', (e) => {
+    if (!operator) {
+      num1 = numberDisplay.textContent;
+      operator = e.target.textContent;
+      currEvalDisplay.textContent = numberDisplay.textContent;
+      numberDisplay.textContent = "";
+    } else {
+      num2 = numberDisplay.textContent;
+      if (operator !== e.target.textContent) {
+        numberDisplay.textContent = operate(operator, num1, num2);
+        currEvalDisplay.textContent = numberDisplay.textContent;
+        operator = e.target.textContent;
+        num1 = numberDisplay.textContent;
+        num2 = "";
+        numberDisplay.textContent = "";
+      }
+    }
+  });
 }
 calc.appendChild(operatorsContainer);
+
+
