@@ -4,6 +4,8 @@ body {
 
 h1 {
   text-align: center;
+  font-family: monospace;
+  color: rgb(58, 144, 144);
 }
 
 .mainContainer {
@@ -12,12 +14,23 @@ h1 {
   align-items: center;
 }
 
+.borderContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: lightcoral;
+  height: 190px;
+  border-radius: 10px;
+}
+
 .display {
   width: 188px;
   height: 58px;
   text-align: end;
   margin-bottom: 2px;
   background-color: rgb(165, 161, 161);
+  padding-right: 5px;
+  padding-top: 2px;
 }
 
 .numbers {
@@ -33,6 +46,9 @@ h1 {
   width: 40px;
   height: auto;
   font-size: large;
+  transform: scale(0.98);
+  box-shadow: 3px 2px 2px 1px rgba(0, 0, 0, 0.24); 
+  border-radius: 5px;
 }
 
 .operatorsContainer {
@@ -42,11 +58,14 @@ h1 {
 
 .calc {
   display: flex;
-  /* margin: 10px; */
 }
 
 .btn-clear {
   padding: 0 auto;
   font-size: 13px;
   font-weight: 500;
+}
+
+.operations {
+  background-color: #8adb39; 
 }

@@ -11,14 +11,18 @@ document.body.appendChild(container);
 const add = (a, b) => a + b;
 const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
-// rounded divided upto 2 decimal points
-const divide = (a, b) => Math.floor(a/b * 100) / 100;
+const divide = (a, b) => {
+  if (b === 0) alert("Trying to divide w zero, Will result in infinity ;)")
+  // rounded divided upto 2 decimal points
+  return Math.floor(a/b * 100) / 100;
+};
 
 const display = document.createElement("div");
 const currEvalDisplay = document.createElement("div");
 const numberDisplay = document.createElement("div");
 
 currEvalDisplay.textContent = "0";
+currEvalDisplay.classList.add("currEvalDisplay");
 display.classList.add("display");
 numberDisplay.textContent = "0";
 container.appendChild(display);
@@ -51,6 +55,13 @@ calc.classList.add("calc");
 const numbers = document.createElement("div");
 numbers.classList.add("numbers");
 container.appendChild(calc);
+
+const borderContainer = document.createElement("div");
+borderContainer.classList.add("borderContainer");
+borderContainer.appendChild(display);
+borderContainer.appendChild(calc);
+
+container.appendChild(borderContainer);
 
 // Create buttons for 1 to 9
 for (let i = 1; i <= 9; i++) {
@@ -92,7 +103,6 @@ numbers.appendChild(btn);
 calc.appendChild(numbers);
 btn.addEventListener('click', (e) => {
   numberDisplay.textContent += e.target.textContent;
-  currEvalDisplay.textContent = numberDisplay.textContent;
 });
 
 // Equal sign
@@ -122,6 +132,7 @@ for (let i = 0; i < 4; i++) {
   const btn = document.createElement("button");
   btn.textContent = OPERATORS[i];
   btn.classList.add("btn");
+  btn.classList.add("operations");
   operatorsContainer.appendChild(btn);
 
   btn.addEventListener('click', (e) => {
