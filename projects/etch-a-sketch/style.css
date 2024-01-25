@@ -38,3 +38,9 @@
 .mouseover {
   background-color: #1ba3f2;
 }
+
+.footer {
+  text-align: center;
+  margin-top: 10px;
+  color: black;
+}

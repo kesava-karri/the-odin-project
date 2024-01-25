@@ -1,3 +1,6 @@
+const NAME = "kesava-karri";
+const GITHUB_URL = "https://github.com/kesava-karri";
+
 let container = document.createElement("div");
 let div = document.createElement("div");
 div.classList.add("mainContainer");
@@ -28,7 +31,7 @@ function createGrid(numOfSquares = 50) {
   }
 }
 
-// Create default 16 x 16 grid of square divs
+// Create default 50 x 50 grid of square divs
 createGrid();
 
 const btn = document.createElement("button");
@@ -53,3 +56,14 @@ btn.onclick = () => {
   createGrid(numOfSquares);
 };
 div.insertBefore(btn, container);
+
+const footer = document.createElement("footer");
+const link = document.createElement("a");
+link.textContent = `${NAME}`;
+link.href = `${GITHUB_URL}`;
+link.target = "_blank";
+link.rel = "noopener noreferrer";
+footer.classList.add("footer");
+footer.textContent = `Copyright © ${new Date().getFullYear()} `;
+footer.appendChild(link);
+document.body.appendChild(footer);

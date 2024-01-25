@@ -1,4 +1,6 @@
 const OPERATORS = ["+", "-", "*", "/", "="];
+const NAME = "kesava-karri";
+const GITHUB_URL = "https://github.com/kesava-karri";
 
 const h1 = document.createElement("h1");
 h1.textContent = "Calculator";
@@ -156,4 +158,13 @@ for (let i = 0; i < 4; i++) {
 }
 calc.appendChild(operatorsContainer);
 
-
+const footer = document.createElement("footer");
+const link = document.createElement("a");
+link.textContent = `${NAME}`;
+link.href = `${GITHUB_URL}`;
+link.target = "_blank";
+link.rel = "noopener noreferrer";
+footer.classList.add("footer");
+footer.textContent = `Copyright © ${new Date().getFullYear()} `;
+footer.appendChild(link);
+container.appendChild(footer);
