@@ -1,4 +1,8 @@
-## Skills Demostrated
+### Project Overview
+ - The showcased project illustrates the proficiency in the skills listed below 
+ and is accessible at the following [project link](https://kesava-karri.github.io/the-odin-project/projects/sign-up-form/).
+
+### Skills Demostrated
 - Sign-Up Forms
 - Usage of local custom font
 - Overlap banner on an image & more...
