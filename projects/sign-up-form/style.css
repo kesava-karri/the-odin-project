@@ -1,0 +1,22 @@
+:root {
+  height: 1020px;
+}
+
+body {
+  background-color: lightgray;
+  display: flex;
+  margin: 0 0;
+  height: 100rem;
+}
+
+.background-image > img{
+  /* max-width: 535px; */
+  height: 820px;
+  width: 500px;
+  
+}
+
+.logo > img {
+  width: 100px;
+  height: auto;
+}
