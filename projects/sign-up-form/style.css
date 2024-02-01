@@ -1,22 +1,175 @@
-:root {
-  height: 1020px;
+@font-face {
+  font-family: "Norse Bold";
+  src: url("./fonts/Norse-Bold.otf");
 }
 
 body {
-  background-color: lightgray;
+  width:fit-content;
+  background-color: rgb(243, 243, 243);
   display: flex;
   margin: 0 0;
-  height: 100rem;
 }
 
-.background-image > img{
-  /* max-width: 535px; */
-  height: 820px;
-  width: 500px;
-  
+.card-container {
+  position: relative;
+  width: 409px;
 }
 
-.logo > img {
+.card-image {
+  height: 696px;
+  width: auto;
+  position: absolute;
+  z-index: -1;
+}
+
+.logo-banner {
+  width: 409px;
+  display: flex;
+  margin-top: 150px;
+  background-color:rgb(255, 255, 255);
+  opacity: 0.3;
+  justify-content:center;
+  padding: 8px 0;
+}
+
+.logo {
   width: 100px;
-  height: auto;
+}
+
+.logo-text {
+  color:rgb(4, 133, 246);
+  font-family: "Norse Bold", monospace;
+  font-size: 80px;
+  padding: 20px 5px;
+}
+
+.image-credits {
+  text-align: center;
+  color:aliceblue;
+  margin-top: 29em;
+  font-size:smaller;
+  font-weight: 200;
+}
+
+.link {
+  color:aliceblue;
+  font-family: "Norse Bold", monospace;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+
+.italicize {
+  font-style: italic;
+}
+
+.right-text, .bottom-container {
+  margin: 0 220px;
+}
+
+.right-text, .main-text {
+  font-family: monospace;
+  font-size: 20px;
+}
+
+.random-text {
+  font-weight: 500;
+}
+
+.form {
+  margin-left: 175px;
+  background-color: rgb(255, 255, 255);
+  height: 269px;
+}
+
+.inner-container {
+  padding: 25px 45px;
+  display: flex;
+  flex-direction: column;
+  border-style: none;
+  box-shadow: 2px 5px 5px rgb(181, 176, 176);
+}
+
+.inner-inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 600px;
+}
+
+.row {
+  display: flex;
+  flex: 1;
+}
+
+.column {
+  margin-top: 20px;
+  margin-right: 75px;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
+
+label {
+  font-size: small;
+  font-family: monospace;
+  font-weight: 300;
+}
+
+input:focus {
+  border-color: #20a8f7;
+  box-shadow: 2px 4px 2px rgb(156, 155, 155);
+}
+
+.btn {
+  box-shadow: 2px 2px 2px rgb(88, 88, 88);
+
+}
+
+input {
+  border-width: 2px;
+  border-color: rgba(245, 245, 245, 0.395);
+  height: 25px;
+  width: 256px;
+  border-radius: 4px;
+}
+
+.bottom-container {
+  margin-top: 35px;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn {
+  padding: 14px 50px;
+  border-radius: 6px;
+  color: white;
+  font-family: monospace;
+  font-size: 15px;
+  font-weight: 500;
+  width: 235px;;
+  background-color: #20a8f7;
+  border-style: none;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.login {
+  font-size: 18px;
+}
+
+.login-link {
+  text-decoration: none;
+  color: #20a8f7d0;
+  font-weight: 500;
+}
+
+.passwords:invalid {
+  border-color: rgba(255, 0, 0, 0.651);
 }
