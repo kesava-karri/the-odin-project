@@ -1,4 +1,12 @@
 /*
+  Decode a base64 string
+*/
+function decode(encoded) {
+  let decoded = atob(encoded);
+  return decoded;
+}
+
+/*
   This function provides a random whole number between 0 and upperLimit
 */
 export function randInt(upperLimit) {
