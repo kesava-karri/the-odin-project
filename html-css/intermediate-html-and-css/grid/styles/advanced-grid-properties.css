@@ -1,0 +1,51 @@
+.grid-container {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 2fr) repeat(3, 100px);
+
+  /* min() & max() functions
+  grid-template-rows: repeat(2, min(200px, 50%));
+  grid-template-columns: repeat(5, max(120px, 15%)); 
+  */
+
+  /* minmax() - can only be used for some grid properties
+  grid-template-columns: repeat(5, minmax(150px, 200px));
+  */
+
+  /* clamp() - can be used anywhere on, not just to some grid properties
+  grid-template-columns: repeat(5, clamp(150px, 20%, 200px));
+  */
+
+  /* auto-fit & auto-fill
+  grid-template-columns: repeat(auto-fit, 200px);
+
+  /* auto-fit with minmax() is simply amazing :)
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  */
+  
+  background-color: skyblue;
+  gap: 4px;
+  padding: 4px;
+  overflow: auto;
+  resize: both;
+}
+
+.grid-item {
+  background-color: #444;
+  text-align:center;
+  color: #ddd;
+  font-family: sans-serif;
+  font-size: 1.5rem;
+  padding: 12px;
+}
+
+
+p {
+  margin: 12px auto 24px;
+}
+
+img {
+  height: 60px;
+}
