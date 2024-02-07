@@ -1,0 +1,27 @@
+body {
+  font-family: monospace;
+  font-style: italic;
+  text-align: center;
+  font-size: large;
+  margin-top: 20vh;
+}
+
+.grid-container {
+  display: grid;
+  gap: 15px;
+  width: fit-content;
+  margin: auto;
+}
+
+h3 {
+  color: rgb(115, 220, 185);
+}
+
+a {
+  text-decoration: none;
+  color:rgb(65, 159, 242);
+}
+
+a:visited {
+  color:rgb(5, 171, 115);
+}
