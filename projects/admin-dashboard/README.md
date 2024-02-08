@@ -15,5 +15,4 @@
 
 ### Read my insights about grid [here](https://www.showwcase.com/article/37664/day-10-day-11-grid-layout)
 
-### Image Credits
-- [Logo](https://playvalorant.com/en-us/media/logos/) from Valorant
+#### Like the svg icons? Get them from [here](https://pictogrammers.com/library/mdi/)
