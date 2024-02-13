@@ -5,40 +5,86 @@ function Book(title, author, pages, isRead) {
   this.isRead = isRead;
   this.info = function() {
     return this.title + " by " + this.author + ", " + this.pages + " pages, "
-      + (this.isRead 
-        ? "read it"
-        : "didn't read yet");
+      + this.isRead;
   }
 }
 
-const book0 = new Book("The Hobbit","J.R.R. Tolkien", 295, false);
-const book1 = new Book("Power of Habits","Charles Duhigg", 300, false);
-const book2 = new Book("How to Talk to Anyone","Leil Lowndes", 365, false);
+
+const book0 = new Book("Power of Habits","Charles Duhigg", 300, "Read");
+const book1 = new Book("How to Talk to Anyone","Leil Lowndes", 365, "Unread");
 
 const books = [];
-// to check
-books.push(book0.info());
-books.push(book1.info());
-books.push(book2.info());
 
-function addBookToLibrary(title, author, pages, isRead) {
+addBookToLibrary(book0);
+addBookToLibrary(book1);
+
+function addBookToLibrary(info) {
+  [title, author, pages, isRead] = [...Object.values(info)];;
   const book = new Book(title, author, pages, isRead);
-  console.log("book instanceof Book: ", this instanceof book);
-  console.log(this.books);
-  books.push(book.info());
-}
+  books.push(book);
 
-const container = document.querySelector(".container");
-for (const book of books) {
+  const container = document.querySelector(".container");
   const div = document.createElement("div");
   div.classList.add("card");
 
-  const bookInfo = book.split(",");
+  const bookInfo = book.info().split(",");
   bookInfo.forEach(infoPart => {
-    const p = document.createElement("p");
-    p.textContent = infoPart;
-    div.append(p);
+    if (infoPart.match("Read") || infoPart.match("Unread")) {
+      const btnRead = document.createElement("button");
+      btnRead.textContent = infoPart;
+      btnRead.classList.add(".btn-read-status");
+      btnRead.addEventListener('click', (e) => {
+        if (book.isRead.match("Read")) {
+          book.isRead = "Unread";
+          btnRead.textContent = "Unread";
+        } else if (book.isRead.match("Unread")){
+          book.isRead = "Read";
+          btnRead.textContent = "Read";
+        }
+      });
+      div.append(btnRead);
+    } else {
+      const p = document.createElement("p");
+      p.textContent = infoPart;
+      div.append(p);
+    }
   });
-
+  
+  
+  const btnRemove = document.createElement("button");
+  btnRemove.classList.add(".btn-remove");
+  btnRemove.textContent = "Remove";
+  div.appendChild(btnRemove);
+  btnRemove.addEventListener('click', (e) => {
+    container.removeChild(div);
+    books.splice(books.indexOf(book), 1);
+  });
+  
   container.append(div);
 }
+
+const dialog = document.querySelector("#dialog");
+
+const btnNewBook = document.querySelector(".btn-new-book");
+btnNewBook.addEventListener('click', (event) => {
+  dialog.showModal();
+});
+
+const btnAddNewBook = document.querySelector(".btn-add-new-book");
+btnAddNewBook.addEventListener('click', (e) => {
+  e.preventDefault();
+  const form = document.querySelector("#form");
+  const formData = Object.fromEntries(new FormData(form).entries());
+
+  addBookToLibrary(formData);
+  form.reset();
+  dialog.close();
+});
+
+const btnClose = document.querySelector(".btn-close");
+btnClose.addEventListener('click', (e) => {
+  e.preventDefault();
+  dialog.close();
+});
+
+
