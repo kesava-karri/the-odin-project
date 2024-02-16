@@ -51,6 +51,7 @@ const GameController = function() {
   const player1 = createPlayer("X", "Player 1: [X]");
   const player2 = createPlayer("O", "Player 2: [O]");
   let gameboard = Gameboard.createBoard();
+  let tieCounter = 0;
 
   let activePlayer = player1;
   
@@ -68,10 +69,12 @@ const GameController = function() {
 
     const overRows = () => {
       let player1Count = 0; 
-      let player2Count = 0; 
+      let player2Count = 0;
       for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
           const currSign = gameboard[i][j];
+          // 'cause to win all the spots over row/col/diagonal must be filled
+          if (currSign === UNICODE_SPACE) return false;
           if (currSign === player1Sign) player1Count++;
           else if (currSign === player2Sign) player2Count++;
         }
@@ -83,7 +86,7 @@ const GameController = function() {
           player2Count = 0;
         }
       }
-      return "";
+      return false;
     }
 
     const overColumns = () => {
@@ -92,6 +95,7 @@ const GameController = function() {
       for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
           const currSign = gameboard[j][i];
+          if (currSign === UNICODE_SPACE) return false;
           if (currSign === player1Sign) player1Count++;
           else if (currSign === player2Sign) player2Count++;
         }
@@ -103,7 +107,7 @@ const GameController = function() {
           player2Count = 0;
         }
       }
-      return "";
+      return false;
     }
 
     const overDiagonals = () => {
@@ -113,13 +117,15 @@ const GameController = function() {
       let diagPlayer2Count = 0; 
       for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
+          const currSign = gameboard[i][j];
+          if (currSign === UNICODE_SPACE) return false;
           if (i + j == 2) {
-            if (gameboard[i][j] == player1Sign) diagPlayer1Count++;
-            else if (gameboard[i][j] == player2Sign) diagPlayer2Count++;
+            if (currSign == player1Sign) diagPlayer1Count++;
+            else if (currSign == player2Sign) diagPlayer2Count++;
           }
           if (i == j) {
-            if (gameboard[i][j] == player1Sign) principalDiagPlayer1Count++;
-            else if (gameboard[i][j] == player2Sign) principalDiagPlayer2Count++;
+            if (currSign == player1Sign) principalDiagPlayer1Count++;
+            else if (currSign == player2Sign) principalDiagPlayer2Count++;
           }
         }
       }
@@ -128,6 +134,7 @@ const GameController = function() {
         || diagPlayer1Count === 3 || diagPlayer2Count === 3) {
         return true;
       }
+      return false;
     }
 
     return {
@@ -152,6 +159,12 @@ const GameController = function() {
 
     if(gameboard[row][column] === UNICODE_SPACE) {
       gameboard[row][column] = activePlayer.getSign();
+      tieCounter++;
+      if (tieCounter === 9) {
+        console.log(`It's a tie!`);
+        printBoard();
+        return `It's a tie!`;
+      }
       // check win or tie
       // game logic on who wins, also consider the tie situation
       if (checkWin.overColumns()
