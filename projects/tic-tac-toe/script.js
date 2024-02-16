@@ -3,22 +3,19 @@
 // additional instances
 const UNICODE_SPACE = "\u0020";
 
-const Gameboard = (function() {
+const Gameboard = function() {
   // create 3x3 matrix to play
   const board = [];
   const rows = 3;
   const columns = 3;
 
-  const createBoard = () => {
-    for (let i = 0; i < rows; i++) {
-      const innerboard = [];
-      for (let j = 0; j < columns; j++) {
-        // we can display empty space when UI is added
-        innerboard.push(UNICODE_SPACE);
-      }
-      board.push(innerboard);
+  for (let i = 0; i < rows; i++) {
+    const innerboard = [];
+    for (let j = 0; j < columns; j++) {
+      // we can display empty space when UI is added
+      innerboard.push(UNICODE_SPACE);
     }
-    return getBoard();
+    board.push(innerboard);
   }
   
   const getBoard = () => {
@@ -26,10 +23,9 @@ const Gameboard = (function() {
   }
 
   return {
-    createBoard,
     getBoard,
   };
-})();
+};
 
 const createPlayer = (sign, name) => {
   let score = 0;
@@ -48,13 +44,16 @@ const createPlayer = (sign, name) => {
 }
 
 const GameController = function() {
-  const player1 = createPlayer("X", "Player 1: [X]");
-  const player2 = createPlayer("O", "Player 2: [O]");
-  let gameboard = Gameboard.createBoard();
+  const input1 = prompt("Player 1 [X]: ");
+  const input2 = prompt("Player 2 [O]: ");
+
+  const player1 = createPlayer("X", `[X]: ${input1}`);
+  const player2 = createPlayer("O", `[O]: ${input2}`);
+  let gameboard = Gameboard();
   let tieCounter = 0;
 
   let activePlayer = player1;
-  
+  const getActivePlayer = () => activePlayer;
   // Only allow the play by turns -> switch player
   let switchPlayer = () => {
     activePlayer = activePlayer === player1 ? player2 : player1; 
@@ -62,8 +61,8 @@ const GameController = function() {
   }
 
   const checkWin = (function() {
-    const rows = gameboard.length;
-    const cols = gameboard[0].length;
+    const rows = gameboard.getBoard().length;
+    const cols = gameboard.getBoard()[0].length;
     const player1Sign = "X";
     const player2Sign = "O";
 
@@ -72,9 +71,8 @@ const GameController = function() {
       let player2Count = 0;
       for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
-          const currSign = gameboard[i][j];
-          // 'cause to win all the spots over row/col/diagonal must be filled
-          if (currSign === UNICODE_SPACE) return false;
+          const currSign = gameboard.getBoard()[i][j];
+
           if (currSign === player1Sign) player1Count++;
           else if (currSign === player2Sign) player2Count++;
         }
@@ -94,8 +92,8 @@ const GameController = function() {
       let player2Count = 0; 
       for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
-          const currSign = gameboard[j][i];
-          if (currSign === UNICODE_SPACE) return false;
+          const currSign = gameboard.getBoard()[j][i];
+
           if (currSign === player1Sign) player1Count++;
           else if (currSign === player2Sign) player2Count++;
         }
@@ -117,8 +115,8 @@ const GameController = function() {
       let diagPlayer2Count = 0; 
       for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
-          const currSign = gameboard[i][j];
-          if (currSign === UNICODE_SPACE) return false;
+          const currSign = gameboard.getBoard()[i][j];
+
           if (i + j == 2) {
             if (currSign == player1Sign) diagPlayer1Count++;
             else if (currSign == player2Sign) diagPlayer2Count++;
@@ -146,33 +144,23 @@ const GameController = function() {
 
   // fill the 1x1 grid with whoever plays
   const playRound = (row, column) => {
-    console.log(`${activePlayer.getName()} is making the move at (row, column): `
-      + `(${row}, ${column})`
-    );
 
-    const printBoard = () => {
-      for (let i = 0; i < 3; i++) {
-        console.log(gameboard[i]);
-      }
-      return "Here's the board after the play";
-    }
-
-    if(gameboard[row][column] === UNICODE_SPACE) {
-      gameboard[row][column] = activePlayer.getSign();
+    if(gameboard.getBoard()[row][column] === UNICODE_SPACE) {
+      gameboard.getBoard()[row][column] = getActivePlayer().getSign();
       tieCounter++;
       if (tieCounter === 9) {
-        console.log(`It's a tie!`);
-        printBoard();
-        return `It's a tie!`;
+        alert(`It's a tie!`);
+        location.reload();
+        return;
       }
       // check win or tie
       // game logic on who wins, also consider the tie situation
       if (checkWin.overColumns()
         || checkWin.overRows()
         || checkWin.overDiagonals()) {
-        printBoard();
-        console.log(`${activePlayer.getName()} won the game`);
-        return `${activePlayer.getName()} won the game`;
+        alert(`${getActivePlayer().getName()} won the game`);
+        location.reload();
+        return;
       }
 
       switchPlayer();
@@ -180,22 +168,53 @@ const GameController = function() {
       console.log(`(row, column): ${row} ${column} is already filled, please 
       choose another position`);
     }
-
-    return printBoard();
   }
 
   return {
-    activePlayer,
+    getActivePlayer,
     playRound,
+    getBoard: gameboard.getBoard,
   }
-  
-
-  // display the result in a box -> UI
-
-  // Display Scoreboard -> UI
 };
 
-const gameController = GameController();
+const ScreenController = () => {
+  const gameController = GameController();
+  let playerTurnDiv = document.querySelector(".turn");
+  const boardDiv = document.querySelector(".board");
+  
+  const updateScreen = () => {
+    boardDiv.textContent = "";
+
+    const board = gameController.getBoard();
+
+    playerTurnDiv.textContent = 
+      `${gameController.getActivePlayer().getName()}'s turn`;
+
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        const cellBtn = document.createElement("button");
+        cellBtn.classList.add("cell-btn");
+
+        cellBtn.dataset.row = i;
+        cellBtn.dataset.column = j;
+        cellBtn.textContent = board[i][j];
+        boardDiv.appendChild(cellBtn);
+      }
+    }
+  }
+
+  boardDiv.addEventListener('click', (e) => {
+    const currentRow = e.target.dataset.row;
+    const currentColumn = e.target.dataset.column;
+
+    gameController.playRound(currentRow, currentColumn);
+    updateScreen();
+  });
+
+  updateScreen();
+}
+
+ScreenController();
 
 // Quick Play:
 /*
