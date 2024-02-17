@@ -149,25 +149,38 @@ const GameController = function() {
       gameboard.getBoard()[row][column] = getActivePlayer().getSign();
       tieCounter++;
       if (tieCounter === 9) {
-        alert(`It's a tie!`);
-        location.reload();
-        return;
+        const tieMsg = `It's a tie!`;
+        const div = addResult(); 
+        div.textContent = tieMsg;
+        return true;
       }
       // check win or tie
       // game logic on who wins, also consider the tie situation
       if (checkWin.overColumns()
         || checkWin.overRows()
         || checkWin.overDiagonals()) {
-        alert(`${getActivePlayer().getName()} won the game`);
-        location.reload();
-        return;
+        const winMsg = `${getActivePlayer().getName()} won the game 🎉`;
+        const div = addResult();
+        div.textContent = winMsg;
+        // return true to disable any more clicks on the board
+        return true;
       }
 
       switchPlayer();
     } else {
-      console.log(`(row, column): ${row} ${column} is already filled, please 
-      choose another position`);
+      console.log(`(row, column): ${row}, ${column} is already filled, please `
+       + `choose another position`);
+      alert(`(row, column): ${1 + Number(row)}, ${Number(column) + 1} is already filled, please ` 
+      + `choose another position`);
     }
+  }
+
+  const addResult = () => {
+    const container = document.querySelector(".container");
+    const resultDiv = document.createElement("div");
+    resultDiv.classList.add("result");
+    container.appendChild(resultDiv);
+    return resultDiv;
   }
 
   return {
@@ -207,11 +220,25 @@ const ScreenController = () => {
     const currentRow = e.target.dataset.row;
     const currentColumn = e.target.dataset.column;
 
-    gameController.playRound(currentRow, currentColumn);
+    const result = gameController.playRound(currentRow, currentColumn);
     updateScreen();
+    if (result) {
+      boardDiv.style.pointerEvents = "none";
+    }
+  });
+
+  const container = document.querySelector(".container");
+  const restartBtn = document.createElement("button");
+  restartBtn.textContent = "restart game";
+  restartBtn.classList.add("restart-btn");
+  container.appendChild(restartBtn);
+
+  restartBtn.addEventListener('click', () => {
+    location.reload();
   });
 
   updateScreen();
+
 }
 
 ScreenController();

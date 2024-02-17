@@ -4,9 +4,10 @@ body {
 
 .heading {
   font-family: cursive;
+  margin-top:auto;
 }
 
-.turn {
+.turn, .result, .restart-btn {
   font-family: monospace;
 }
 
@@ -21,14 +22,48 @@ body {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   border: 14px solid lightcoral;
-  width:500px;
-  height: 500px;
+  width: 25rem;
+  height: 25rem;
 }
 
 .cell-btn {
   font-size: xx-large;
 }
 
-.cell-btn:hover {
+.cell-btn:hover, .restart-btn {
   cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+  .board {
+    width:20rem;
+    height:20rem;
+  }
+}
+
+a {
+  text-decoration: none;
+  color:lightcoral;
+}
+
+footer {
+  margin-top: 10px;
+  display: flex;
+  justify-content:center;
+}
+
+.restart-btn {
+  margin-top: 5px;
+  padding: 4px 10px;
+  border: 0.5px solid black;
+  border-radius: 4px;
+  background-color:rgb(87, 209, 250);
+}
+
+.result {
+  padding: 20px;
+  color:rgb(244, 255, 32);
+  border-radius: 2px;
+  background-color: rgb(12, 200, 221);
+  margin-top: 5px;
 }
