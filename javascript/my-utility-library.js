@@ -14,8 +14,10 @@ export function randInt(upperLimit) {
   return randomInt;
 }
 
-/*
-  Function which returns the least of two numbers a and b.
+/**
+* Function which returns the least of two numbers a and b.
+* @param {Number} a 
+* @param {Number} b 
 */
 export function min(a, b) {
   return a < b ? a : b;

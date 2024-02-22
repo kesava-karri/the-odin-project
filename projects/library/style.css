@@ -25,6 +25,7 @@ h1 {
   display:grid;
   justify-items:center;
   row-gap: 5px;
+  padding-bottom: 5px;
 }
 .btn-new-book {
   margin: 10px 48%;
@@ -39,7 +40,7 @@ button {
   margin-bottom: 3px;
 }
 
-.btn-new-book:hover, .btn-add-new-book {
+button:hover {
   cursor: pointer;
   transform: scale(1.1);
 }
