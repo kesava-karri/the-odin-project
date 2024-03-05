@@ -60,10 +60,17 @@ module.exports = {
       },
     ]
   },
+  devtool: 'inline-source-map',
+  devServer: {
+    static: './dist',
+  },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Output Management',
+      title: 'Development',
       // template: './src/template.html',
     }),
   ],
+  optimization: {
+    runtimeChunk: 'single',
+  },
 }
