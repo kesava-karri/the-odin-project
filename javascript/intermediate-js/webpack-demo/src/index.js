@@ -8,6 +8,10 @@ import yaml from './data.yaml';
 import json from './data.json5';
 import printMe from './print.js';
 
+if (process.env.NODE_ENV !== 'production') {
+  console.log('Looks like we are in development mode!');
+}
+
 console.log(toml.title); // output `TOML Example`
 console.log(toml.owner.name); // output `Tom Preston-Werner`
 
