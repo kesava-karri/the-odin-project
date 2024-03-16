@@ -1,0 +1,26 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "Homepage of a restaurant",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "npx webpack",
+    "watch": "npx  webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kesava-karri/the-odin-project.git#main"
+  },
+  "author": "Kesava Karri",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kesava-karri/the-odin-project/issues"
+  },
+  "homepage": "https://github.com/kesava-karri/the-odin-project/tree/main#readme",
+  "devDependencies": {
+    "html-webpack-plugin": "^5.6.0",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
+  }
+}
