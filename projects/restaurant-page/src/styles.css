@@ -3,6 +3,24 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color:rgb(223, 178, 146);
+}
+
+button {
+  padding: 0.3em 0.8em;
+  border: solid ivory 1px;
+  margin: 0.2em;
+  font-weight:600;
+}
+
+button:hover {
+  transform: scale(1.2);
+  cursor:pointer;
+}
+
+.menu-items {
+  font-style: italic;
+  font-weight: 500;
 }
 
 #content {
@@ -11,6 +29,9 @@ body {
   align-items:center;
   font-size: larger;
   font-family: monospace;
+  background-color: yellowgreen;
+  margin-top: 1em;
+  padding: 0 1em;
 }
 
 .crêpe {
