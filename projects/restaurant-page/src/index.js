@@ -1,1 +1,3 @@
-console.log("here");
+import intialPageLoader from "./intial";
+
+intialPageLoader();
