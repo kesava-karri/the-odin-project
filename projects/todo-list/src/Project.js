@@ -13,9 +13,9 @@ export default class Project {
 
   addNewTodo(todo) {
     this.#listOfTodos.push(todo);
-    console.log("Updated todo list: ");
+    console.debug("Updated todo list: ");
     for (todo of this.#listOfTodos) {
-      console.log(todo);
+      console.debug(todo);
     }
   }
 
@@ -30,6 +30,6 @@ export default class Project {
 
   setProjectName(newProjectName) {
     this.#projectName = newProjectName;
-    console.log("Updated project name: " + this.#projectName);
+    // console.log("Updated project name: " + this.#projectName);
   }
 }

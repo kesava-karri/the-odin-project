@@ -6,3 +6,10 @@
   margin-top: 1em;
   justify-content: space-between;
 }
+
+.project {
+  background-color: rgba(192, 184, 184, 0.991);
+  width:max-content;
+  padding: 0.5em;
+  border-radius: 6px;
+}
