@@ -19,16 +19,16 @@ projectDiv.classList.add('project');
 
 const createNewTodoBtn = document.createElement('button');
 createNewTodoBtn.textContent = "Add new Todo";
+const formContainer = new Form().createFormContainer();
+createNewTodoBtn.appendChild(formContainer);
+
+createNewTodoBtn.addEventListener('click', (e) => {
+  formContainer.querySelector('dialog').showModal();
+  // formContainer.querySelector('form').reset();
+});
 
 const createNewProjectBtn = document.createElement('button');
 createNewProjectBtn.textContent = "Create new Project";
-const formContainer = new Form().createFormContainer();
-createNewProjectBtn.appendChild(formContainer);
-
-createNewProjectBtn.addEventListener('click', (e) => {
-  formContainer.querySelector('dialog').showModal();
-  formContainer.querySelector('form').reset();
-});
 
 document.body.appendChild(projectDiv);
 
