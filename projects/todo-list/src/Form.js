@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import {
+  BUTTON,
   DATE_TIME_LOCAL,
   DIV,
   INPUT,
@@ -8,6 +9,8 @@ import {
   TEXT_AREA,
   SELECT,
 } from "./constants";
+
+import createCloseBtn from "./myUtil.js";
 
 export default class Form {
   constructor() {
@@ -22,24 +25,27 @@ export default class Form {
     const dialogBox = document.createElement('dialog');
     container.classList.add('form-container');
     dialogBox.classList.add('dialog-box');
+    
+    const closeBtn = createCloseBtn();
 
     const form = document.createElement('form');
     form.method = "dialog";
 
-    const titleDiv = this.createDiv("Title", INPUT, TEXT);
-    const description = this.createDiv("Description", INPUT, TEXT);
+    const titleDiv = Form.createDiv("Title", INPUT, TEXT);
+    const description = Form.createDiv("Description", INPUT, TEXT);
 
     // const dueDate = new Date().toLocaleString(Date.now());
-    const priority = this.createDiv("Priority", SELECT);
-    const notes = this.createDiv("Notes", TEXT_AREA);
+    const priority = Form.createDiv("Priority", SELECT);
+    const notes = Form.createDiv("Notes", TEXT_AREA);
     
-    const dateDiv = this.createDiv("Due-date", INPUT, DATE_TIME_LOCAL);
+    const dateDiv = Form.createDiv("Due-date", INPUT, DATE_TIME_LOCAL);
 
     form.appendChild(titleDiv);
     form.appendChild(description);
     form.appendChild(dateDiv);
     form.appendChild(priority);
     form.appendChild(notes);
+    form.appendChild(closeBtn);
     
     dialogBox.appendChild(form);
     container.appendChild(dialogBox);
@@ -56,13 +62,13 @@ export default class Form {
    * set to null by default
    * @returns {HTMLDivElement} div
    */
-  createDiv(nameOfLabel, element, inputTypeIfPresent = null) {
+  static createDiv(nameOfLabel, element, inputTypeIfPresent = null) {
     const div = document.createElement(DIV);
     const label = document.createElement(LABEL);
     label.for = nameOfLabel;
     label.textContent = nameOfLabel;
     div.appendChild(label);
-
+    
     const ele = this.#createElement(nameOfLabel, element, inputTypeIfPresent);
     div.appendChild(ele);
 
@@ -78,7 +84,7 @@ export default class Form {
    * set to null by default
    * @returns {HTMLElement} element
    */
-  #createElement(nameOfLabel, element, inputTypeIfPresent = null) {
+  static #createElement(nameOfLabel, element, inputTypeIfPresent = null) {
     const ele = document.createElement(element);
     ele.id = nameOfLabel;
     ele.name = nameOfLabel;
@@ -100,7 +106,7 @@ export default class Form {
    * @param {String} value The options in dropdown select menu
    * @returns {HTMLOptionElement} option 
    */
-  #createOption(value = "--Choose priortiy of the task--") {
+  static #createOption(value = "--Choose priortiy of the task--") {
     const option = document.createElement('option');
     option.value = option.textContent = value;
     return option;
