@@ -13,8 +13,7 @@ import {
 import createCloseBtn from "./myUtil.js";
 
 export default class Form {
-  constructor() {
-  }
+  constructor() {}
 
   /**
    * Creates a container with dialog box & form within it
@@ -22,13 +21,13 @@ export default class Form {
    */
   createFormContainer() {
     const container = document.createElement(DIV);
-    const dialogBox = document.createElement('dialog');
-    container.classList.add('form-container');
-    dialogBox.classList.add('dialog-box');
-    
+    const dialogBox = document.createElement("dialog");
+    container.classList.add("form-container");
+    dialogBox.classList.add("dialog-box");
+
     const closeBtn = createCloseBtn();
 
-    const form = document.createElement('form');
+    const form = document.createElement("form");
     form.method = "dialog";
 
     const titleDiv = Form.createDiv("Title", INPUT, TEXT);
@@ -37,7 +36,7 @@ export default class Form {
     // const dueDate = new Date().toLocaleString(Date.now());
     const priority = Form.createDiv("Priority", SELECT);
     const notes = Form.createDiv("Notes", TEXT_AREA);
-    
+
     const dateDiv = Form.createDiv("Due-date", INPUT, DATE_TIME_LOCAL);
 
     form.appendChild(titleDiv);
@@ -46,7 +45,7 @@ export default class Form {
     form.appendChild(priority);
     form.appendChild(notes);
     form.appendChild(closeBtn);
-    
+
     dialogBox.appendChild(form);
     container.appendChild(dialogBox);
     return container;
@@ -54,11 +53,11 @@ export default class Form {
 
   /**
    * Creates a div containing the elements input & label
-   * The type of input element is defaulted to text, 
+   * The type of input element is defaulted to text,
    * override it when other types are needed
    * @param {String} nameOfLabel
    * @param {String} element
-   * @param {String} inputTypeIfPresent all input fields needs a specific type, 
+   * @param {String} inputTypeIfPresent all input fields needs a specific type,
    * set to null by default
    * @returns {HTMLDivElement} div
    */
@@ -68,7 +67,7 @@ export default class Form {
     label.for = nameOfLabel;
     label.textContent = nameOfLabel;
     div.appendChild(label);
-    
+
     const ele = this.#createElement(nameOfLabel, element, inputTypeIfPresent);
     div.appendChild(ele);
 
@@ -80,7 +79,7 @@ export default class Form {
    * Ex: HTML elements like text, textArea, select
    * @param {String} nameOfLabel
    * @param {String} element
-   * @param {String} inputTypeIfPresent all input fields needs a specific type, 
+   * @param {String} inputTypeIfPresent all input fields needs a specific type,
    * set to null by default
    * @returns {HTMLElement} element
    */
@@ -88,9 +87,8 @@ export default class Form {
     const ele = document.createElement(element);
     ele.id = nameOfLabel;
     ele.name = nameOfLabel;
-    
-    if (inputTypeIfPresent === TEXT
-        || inputTypeIfPresent === DATE_TIME_LOCAL) {
+
+    if (inputTypeIfPresent === TEXT || inputTypeIfPresent === DATE_TIME_LOCAL) {
       ele.type = inputTypeIfPresent;
     } else if (element === SELECT && inputTypeIfPresent === null) {
       ele.appendChild(this.#createOption());
@@ -104,10 +102,10 @@ export default class Form {
   /**
    * Helps to create option HTML element needed in the select menu
    * @param {String} value The options in dropdown select menu
-   * @returns {HTMLOptionElement} option 
+   * @returns {HTMLOptionElement} option
    */
   static #createOption(value = "--Choose priortiy of the task--") {
-    const option = document.createElement('option');
+    const option = document.createElement("option");
     option.value = option.textContent = value;
     return option;
   }
