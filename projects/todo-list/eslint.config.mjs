@@ -21,6 +21,7 @@ export default [
   {
     languageOptions: {
       globals: globals.browser,
+      ecmaVersion: "latest",
     },
   },
   ...compat.extends("airbnb-base"),
