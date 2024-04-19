@@ -1,0 +1,33 @@
+.nav-bar {
+  display: flex;
+  background-color: rgb(127, 187, 255);
+  padding: 1rem;
+  border-radius: 3px;
+}
+
+.show {
+  display: block;
+  width: max-content;
+  background-color: orange;
+  padding: 0.2em;
+  border-radius: 2px;
+}
+
+.hide {
+  display: none;
+}
+
+.drop-down-svg {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  padding: 0.1em 1em;
+  background-color: aliceblue;
+  border-radius: 5px;
+}
+
+.content-box {
+  margin: 1em;
+}
