@@ -1,4 +1,4 @@
-import "./styles.css";
-import menuDropDown from "./menuDropDown";
+import MenuDropDown from "./MenuDropDown";
 
-menuDropDown();
+const dropdown = new MenuDropDown();
+dropdown.createDropDown();

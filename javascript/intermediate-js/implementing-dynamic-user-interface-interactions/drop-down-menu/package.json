@@ -1,6 +1,6 @@
 {
-  "name": "drop-down-menu",
-  "version": "1.0.0",
+  "name": "@kesava-k/drop-down-menu",
+  "version": "1.0.4",
   "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,7 +9,8 @@
     "start": "webpack server --open"
   },
   "keywords": [],
-  "author": "",
+  "author": "Kesava Karri <kkeshav1998@gmail.com>",
+  "homepage": "https://github.com/kesava-karri/the-odin-project/tree/main/javascript/intermediate-js/implementing-dynamic-user-interface-interactions",
   "license": "ISC",
   "description": "",
   "devDependencies": {
