@@ -5,8 +5,7 @@
   border-radius: 3px;
 }
 
-.show {
-  display: block;
+.drop-down {
   width: max-content;
   background-color: orange;
   padding: 0.2em;
