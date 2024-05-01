@@ -29,18 +29,20 @@ export default class MenuDropDown {
     dropDown.appendChild(dropDownSvg);
     dropDown.appendChild(menuContent);
 
-    // Update i for every instance to keep event listeners unique and
-    // making a closure of i w respective dropdowns
+    // To handle multiple dropdowns on the same page, update i for every
+    // instance to keep event listeners unique and making a closure of i w
+    // respective dropdowns
     let ref_i = MenuDropDown.i;
     MenuDropDown.i++;
+    // desktop browser events
+    dropDown.addEventListener("mouseover", menuContentToggle);
+    dropDown.addEventListener("mouseout", menuContentToggle);
+    // mobile browser event
+    dropDownSvg.addEventListener("touchend", menuContentToggle);
 
-    dropDown.addEventListener("mouseover", function (e) {
+    function menuContentToggle() {
       document.querySelector(".menu-content" + ref_i).classList.toggle("hide");
-    });
-
-    dropDown.addEventListener("mouseout", function () {
-      document.querySelector(".menu-content" + ref_i).classList.toggle("hide");
-    });
+    }
 
     navBar.appendChild(dropDown);
   }
