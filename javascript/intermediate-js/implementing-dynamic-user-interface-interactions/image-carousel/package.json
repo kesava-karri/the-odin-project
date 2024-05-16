@@ -14,6 +14,11 @@
   "description": "Image carousel",
   "devDependencies": {
     "css-loader": "^7.1.1",
-    "style-loader": "^4.0.0"
+    "style-loader": "^4.0.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4"
+  },
+  "dependencies": {
+    "html-webpack-plugin": "^5.6.0"
   }
 }
