@@ -1,3 +1,7 @@
+export function mod(a, b) {
+  return ((a % b) + b) % b;
+}
+
 /*
   Decode a base64 string
 */
@@ -15,28 +19,29 @@ export function randInt(upperLimit) {
 }
 
 /**
-* Function which returns the least of two numbers a and b.
-* @param {Number} a 
-* @param {Number} b 
-*/
+ * Function which returns the least of two numbers a and b.
+ * @param {Number} a
+ * @param {Number} b
+ */
 export function min(a, b) {
   return a < b ? a : b;
 }
 
 /*
   A function that returns x to the power of n.
-*/ 
+*/
 function pow(x, n) {
   return x ** n;
   // return Math.pow(x, n);
 }
 
-
 /*
   FizzBuzz game
 */
 function fizzBizz() {
-  let number = parseInt(prompt("Please enter the number you would like to FizzBuzz upto: "));
+  let number = parseInt(
+    prompt("Please enter the number you would like to FizzBuzz upto: ")
+  );
 
   for (let i = 1; i <= number; i++) {
     if (i % 3 == 0 && i % 5 == 0) {
