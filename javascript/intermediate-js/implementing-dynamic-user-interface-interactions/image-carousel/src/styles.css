@@ -5,6 +5,7 @@ h1 {
 
 .carousel {
   background-color: burlywood;
+  box-shadow: 2px 1px 4px burlywood;
   max-width: 90%;
   margin: auto;
   position: relative;
@@ -30,6 +31,7 @@ h1 {
 .circles {
   display: flex;
   justify-content: center;
+  margin-top: 0.2em;
 }
 
 .circles>div :hover {
@@ -53,4 +55,8 @@ h1 {
   width: auto;
   top: 50%;
   right: 2em;
+}
+
+.highlight {
+  filter: invert(20%) sepia(200%) saturate(1500%) hue-rotate(-21deg) brightness(137%) contrast(73%);
 }

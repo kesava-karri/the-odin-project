@@ -57,14 +57,48 @@ document.body.appendChild(footer);
 
 let index = 0;
 const numOfSlides = 3;
+// Display & highlight for the first time page load
 displaySlide(0);
+circle0.classList.add("highlight");
 
-circle0.addEventListener("click", () => displaySlide(0));
-circle1.addEventListener("click", () => displaySlide(1));
-circle2.addEventListener("click", () => displaySlide(2));
+setInterval(callbackFunc, 5000);
 
-arrowBack.addEventListener("click", () => moveLeft(index));
-arrowForward.addEventListener("click", () => moveRight(index));
+function callbackFunc() {
+  autoRotateSlides();
+  blemishSlideIndicator();
+  highlightCurrentCircle(index);
+}
+function autoRotateSlides() {
+  moveRight(index++);
+  console.log("Hey Ashe, what's up?");
+}
+
+circle0.addEventListener("click", (e) => {
+  displaySlide(0);
+  blemishSlideIndicator();
+  e.currentTarget.classList.add("highlight");
+});
+circle1.addEventListener("click", (e) => {
+  displaySlide(1);
+  blemishSlideIndicator();
+  e.currentTarget.classList.add("highlight");
+});
+circle2.addEventListener("click", (e) => {
+  displaySlide(2);
+  blemishSlideIndicator();
+  e.currentTarget.classList.add("highlight");
+});
+
+arrowBack.addEventListener("click", () => {
+  moveLeft(index);
+  blemishSlideIndicator();
+  highlightCurrentCircle(index);
+});
+arrowForward.addEventListener("click", () => {
+  moveRight(index);
+  blemishSlideIndicator();
+  highlightCurrentCircle(index);
+});
 
 function moveLeft(idx) {
   const modIndex = mod(idx - 1, numOfSlides);
@@ -84,4 +118,16 @@ function displaySlide(idx) {
   const slides = document.querySelectorAll(`.slides`);
   slides.forEach((slide) => (slide.style.display = "none"));
   currImg.style.display = "block";
+}
+
+function blemishSlideIndicator() {
+  const circlesEle = document.querySelectorAll(".circles>*");
+  for (const circle of circlesEle) {
+    circle.classList.remove("highlight");
+  }
+}
+
+function highlightCurrentCircle() {
+  const currentCir = document.querySelector(".cir" + index);
+  currentCir.classList.add("highlight");
 }
