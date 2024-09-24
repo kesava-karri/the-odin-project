@@ -8,86 +8,22 @@ import cir from "../assets/circle.svg";
 import createImg from "./CreateImg";
 
 import { mod } from "../../../../my-utility-library";
-
 const carousel = document.createElement("div");
 carousel.classList.add("carousel");
 
-const imgKarthus = createImg(karthus);
-imgKarthus.classList.add("slides");
-imgKarthus.classList.add("img-0");
-carousel.appendChild(imgKarthus);
-
-const imgSkarner = createImg(skarner);
-imgSkarner.classList.add("slides");
-imgSkarner.classList.add("img-1");
-carousel.appendChild(imgSkarner);
-
-const imgAshe = createImg(ashe);
-imgAshe.classList.add("slides");
-imgAshe.classList.add("img-2");
-carousel.appendChild(imgAshe);
+const images = [karthus, skarner, ashe];
+const numOfSlides = images.length;
+images.forEach((image, i) => {
+  const tempImg = createImg(image);
+  tempImg.classList.add("slides");
+  tempImg.classList.add("img-" + i);
+  carousel.appendChild(tempImg);
+});
 
 const arrowBack = createImg(back);
 arrowBack.classList.add("back");
 const arrowForward = createImg(forward);
 arrowForward.classList.add("forward");
-
-const circle0 = createImg(cir);
-circle0.classList.add("cir0");
-const circle1 = createImg(cir);
-circle1.classList.add("cir1");
-const circle2 = createImg(cir);
-circle2.classList.add("cir2");
-
-carousel.appendChild(arrowBack);
-carousel.appendChild(arrowForward);
-
-const footer = document.createElement("footer");
-footer.classList.add("footer");
-footer.textContent = `Image Credits: League of Legends @Riot Games`;
-
-document.body.appendChild(carousel);
-const circles = document.createElement("div");
-circles.classList.add("circles");
-circles.appendChild(circle0);
-circles.appendChild(circle1);
-circles.appendChild(circle2);
-document.body.appendChild(circles);
-document.body.appendChild(footer);
-
-let index = 0;
-const numOfSlides = 3;
-// Display & highlight for the first time page load
-displaySlide(0);
-circle0.classList.add("highlight");
-
-setInterval(callbackFunc, 5000);
-
-function callbackFunc() {
-  autoRotateSlides();
-  blemishSlideIndicator();
-  highlightCurrentCircle(index);
-}
-function autoRotateSlides() {
-  moveRight(index++);
-  console.log("Hey Ashe, what's up?");
-}
-
-circle0.addEventListener("click", (e) => {
-  displaySlide(0);
-  blemishSlideIndicator();
-  e.currentTarget.classList.add("highlight");
-});
-circle1.addEventListener("click", (e) => {
-  displaySlide(1);
-  blemishSlideIndicator();
-  e.currentTarget.classList.add("highlight");
-});
-circle2.addEventListener("click", (e) => {
-  displaySlide(2);
-  blemishSlideIndicator();
-  e.currentTarget.classList.add("highlight");
-});
 
 arrowBack.addEventListener("click", () => {
   moveLeft(index);
@@ -99,6 +35,48 @@ arrowForward.addEventListener("click", () => {
   blemishSlideIndicator();
   highlightCurrentCircle(index);
 });
+
+const circles = document.createElement("div");
+circles.classList.add("circles");
+
+for (let i = 0; i < numOfSlides; i++) {
+  const circle = createImg(cir);
+  circle.classList.add("cir" + i);
+  circles.appendChild(circle);
+  circle.addEventListener("click", (e) => {
+    displaySlide(i);
+    blemishSlideIndicator();
+    e.currentTarget.classList.add("highlight");
+  });
+}
+
+carousel.appendChild(arrowBack);
+carousel.appendChild(arrowForward);
+
+const footer = document.createElement("footer");
+footer.classList.add("footer");
+footer.textContent = `Image Credits: League of Legends @Riot Games`;
+
+document.body.appendChild(carousel);
+document.body.appendChild(circles);
+document.body.appendChild(footer);
+
+let index = 0;
+// Display & highlight for the first time page load
+displaySlide(0);
+document.querySelector(".cir0").classList.add("highlight");
+
+setInterval(callbackFunc, 5000);
+
+function callbackFunc() {
+  autoRotateSlides();
+  blemishSlideIndicator();
+  highlightCurrentCircle(index);
+}
+
+function autoRotateSlides() {
+  moveRight(index++);
+}
 
 function moveLeft(idx) {
   const modIndex = mod(idx - 1, numOfSlides);

@@ -5,7 +5,7 @@ h1 {
 
 .carousel {
   background-color: burlywood;
-  box-shadow: 2px 1px 4px burlywood;
+  box-shadow: 5px 1px 4px burlywood;
   max-width: 90%;
   margin: auto;
   position: relative;
