@@ -1,8 +1,10 @@
 ### Project Overview
- - The showcased project illustrates the proficiency in the skills listed below 
- and is accessible at the following [project link](https://kesava-karri.github.io/the-odin-project/projects/library/).
+
+- The showcased project illustrates the proficiency in the skills listed below
+  and is accessible at the following [project link](https://kesava-karri.github.io/the-odin-project/projects/library/).
 
 ### Skills Demostrated
+
 - Deal with DOM elements
 - Real time removing & updating data storage.
 - Vanilla HTML, CSS & JavaScript

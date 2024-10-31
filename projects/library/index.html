@@ -1,57 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Library</title>
-  <script src="./script.js" defer></script>
-  <link rel="stylesheet" href="./style.css">
-</head>
-<body>
-  <h1>Book Shelf</h1>
-  <div class="container">
-
-  </div>
-  <div> 
-    <button class="btn-new-book">New Book</button>
-    <dialog id="dialog">
-      <div class="btn-close">
-        <button type="button">X</button>
-      </div>
-      <form class="form" method="dialog" id="form">
-        <div>
-          <label for="title">Book Title</label>
-          <input id="title" type="text" class="form-content" name="title">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Library</title>
+    <script src="./script.js" defer></script>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <h1>Book Shelf</h1>
+    <div class="container"></div>
+    <div>
+      <button class="btn-new-book">New Book</button>
+      <dialog id="dialog">
+        <div class="btn-close">
+          <button type="button">X</button>
         </div>
-
-        <div>
-          <label for="author">Author</label>
-          <input id="author" type="text" class="form-content" name="author">
-        </div>
-
-        <div>
-          <label for="pages">Number of pages</label>
-          <input id="pages" type="number" class="form-content" name="pages">
-        </div>
-
-        <div>
-          <p>Finished reading this?</p>
+        <form class="form" method="dialog" id="form">
           <div>
-            <input id="isRead" type="radio" value="Read" name="isRead" class="form-content" checked>
-            <label for="isRead">Yes</label>
+            <label for="title">Book Title</label>
+            <input id="title" type="text" class="form-content" name="title" />
           </div>
+
           <div>
-            <input id="isUnread" type="radio" value="Unread" name="isRead" class="form-content">
-            <label for="isUnread">No</label>
+            <label for="author">Author</label>
+            <input id="author" type="text" class="form-content" name="author" />
           </div>
-        </div>
-        
-        <div class="add-book-btn">
-          <button class="btn-add-new-book">Add new book</button>
-        </div>
-        
+
+          <div>
+            <label for="pages">Number of pages</label>
+            <input id="pages" type="number" class="form-content" name="pages" />
+          </div>
+
+          <div>
+            <p>Finished reading this?</p>
+            <div>
+              <input
+                id="isRead"
+                type="radio"
+                value="Read"
+                name="isRead"
+                class="form-content"
+                checked
+              />
+              <label for="isRead">Yes</label>
+            </div>
+            <div>
+              <input
+                id="isUnread"
+                type="radio"
+                value="Unread"
+                name="isRead"
+                class="form-content"
+              />
+              <label for="isUnread">No</label>
+            </div>
+          </div>
+
+          <div class="add-book-btn">
+            <button class="btn-add-new-book">Add new book</button>
+          </div>
         </form>
-    </dialog>
-  </div>
-</body>
+      </dialog>
+    </div>
+  </body>
 </html>
