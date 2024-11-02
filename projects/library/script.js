@@ -29,7 +29,7 @@ class Library {
     this.#books = [];
   }
 
-  get getBooks() {
+  get #getBooks() {
     return this.#books;
   }
 
@@ -92,8 +92,8 @@ class Library {
     container.append(div);
   }
 }
-const library = new Library();
 
+const library = new Library();
 const book0 = new Book("Power of Habits", "Charles Duhigg", 300, "Read");
 const book1 = new Book("How to Talk to Anyone", "Leil Lowndes", 365, "Unread");
 
@@ -108,12 +108,12 @@ btnNewBook.addEventListener("click", (event) => {
 });
 
 const btnAddNewBook = document.querySelector(".btn-add-new-book");
-btnAddNewBook.addEventListener("click", (e) => {
-  e.preventDefault();
-  const form = document.querySelector("#form");
-  const formData = Object.fromEntries(new FormData(form).entries());
 
-  const [title, author, pages, isRead] = [...Object.values(formData)];
+const form = document.querySelector("#form");
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const [title, author, pages, isRead] = [...new FormData(form).values()];
+
   const book = new Book(title, author, pages, isRead);
 
   library.addBookToLibrary(book);
@@ -125,4 +125,17 @@ const btnClose = document.querySelector(".btn-close");
 btnClose.addEventListener("click", (e) => {
   e.preventDefault();
   dialog.close();
+});
+
+// The below logic is added to not let the user type in non-numeric values in the number input field
+const pages = document.querySelector("#pages");
+pages.addEventListener("keydown", (e) => {
+  if (["Backspace", "Delete", "ArrowLeft", "ArrowRight"].includes(e.code)) {
+    return true;
+  } else if (isNaN(Number(e.key)) || e.code === "Space") {
+    // Here the default for the keydown action is letting the key into the input field
+    // We're preventing the default if the given input is not a number or a space.
+    e.preventDefault();
+    return false;
+  }
 });

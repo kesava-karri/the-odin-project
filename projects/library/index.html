@@ -14,22 +14,41 @@
       <button class="btn-new-book">New Book</button>
       <dialog id="dialog">
         <div class="btn-close">
-          <button type="button">X</button>
+          <button type="button" formnovalidate>X</button>
         </div>
         <form class="form" method="dialog" id="form">
           <div>
             <label for="title">Book Title</label>
-            <input id="title" type="text" class="form-content" name="title" />
+            <input
+              id="title"
+              type="text"
+              class="form-content"
+              name="title"
+              required
+            />
           </div>
 
           <div>
             <label for="author">Author</label>
-            <input id="author" type="text" class="form-content" name="author" />
+            <input
+              id="author"
+              type="text"
+              class="form-content"
+              name="author"
+              required
+            />
           </div>
 
           <div>
             <label for="pages">Number of pages</label>
-            <input id="pages" type="number" class="form-content" name="pages" />
+            <input
+              id="pages"
+              type="number"
+              class="form-content"
+              name="pages"
+              min="1"
+              required
+            />
           </div>
 
           <div>
@@ -41,7 +60,6 @@
                 value="Read"
                 name="isRead"
                 class="form-content"
-                checked
               />
               <label for="isRead">Yes</label>
             </div>
@@ -52,6 +70,7 @@
                 value="Unread"
                 name="isRead"
                 class="form-content"
+                checked
               />
               <label for="isUnread">No</label>
             </div>
