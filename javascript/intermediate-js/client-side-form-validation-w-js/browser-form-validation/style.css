@@ -1,0 +1,19 @@
+html {
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  max-width: min-content;
+  justify-content: end;
+  margin: auto;
+  width: 50%
+}
+
+.container div {
+  margin: 20px;
+}
+
+.error {
+  border-color: red;
+}
