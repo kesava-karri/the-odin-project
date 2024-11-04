@@ -4,6 +4,7 @@ const zipcode = document.querySelector("#zipcode");
 const password = document.querySelector("#pass");
 
 const handleInputValidation = (e) => {
+  e.currentTarget.required = "required";
   if (e.currentTarget.validity.valid) {
     const errorEle = document.querySelector(`#${e.currentTarget.id} + .error`);
     errorEle.textContent = "";
@@ -45,12 +46,17 @@ const form = document.querySelector("#form");
 form.addEventListener("submit", (e) => {
   if (!email.validity.valid) {
     showError(email);
+    e.preventDefault();
   } else if (!country.validity.valid) {
     showError(country);
+    e.preventDefault();
   } else if (!zipcode.validity.valid) {
     showError(zipcode);
+    e.preventDefault();
   } else if (!password.validity.valid) {
     showError(password);
+    e.preventDefault();
+  } else {
+    alert("High Five!!! The form has been successfully submitted!");
   }
-  e.preventDefault();
 });

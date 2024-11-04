@@ -1,4 +1,4 @@
-### Regex pattern descripion for password field
+### Regex pattern description for password field
 
 - _^_ indicates the start of string
 - _$_ indicates the end of string
