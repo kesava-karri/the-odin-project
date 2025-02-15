@@ -1,0 +1,50 @@
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.title {
+  padding: 0 0.5em
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  background-color: aliceblue;
+  margin: 0.3rem 3rem 0;
+  border-radius: 1000px;
+  /* change min & max width after other setup */
+  min-width: 30rem;
+  /* max-width: 100rem; */
+}
+
+.top-container {
+  display: flex;
+  justify-content: space-around;
+  background-color: rgba(255, 225, 187, 0.637);
+  border-radius: 2px;
+}
+
+.form-container {
+  display: flex;
+  padding: 1.3em 0;
+}
+
+.current-forecast-container {
+  background-color: rgba(55, 244, 67, 0.558);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+
+}
+
+.week-forecast-container {
+  background-color: rgba(72, 203, 247, 0.886);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+}
