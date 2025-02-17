@@ -9,7 +9,7 @@ async function getWeatherInfoAPI(location) {
   console.log(url);
   const data = await fetch(url);
   const json = await data.json();
-
+  // doesn't this JSON needs to be parsed?
   console.log(json);
   return json;
 }
@@ -17,16 +17,41 @@ async function getWeatherInfoAPI(location) {
 
 // Extract the data we're looking for!
 function extractRequiredWeatherInfo(json) {
-  const fields = ["resolvedAddress", "description", "currentConditions.temp "];
+  const fields = [
+    "resolvedAddress",
+    "description",
+    "currentConditions.temp",
+    "currentConditions.sunrise",
+    "currentConditions.sunset",
+    "days",
+  ];
 
   const extractedData = fields.reduce((obj, field) => {
-    if (json[field] != undefined) {
-      obj[field] = json[field];
-    }
+    /*
+    Need this "currentConditions.temp"
+    Objectives/Goals: 
+      1. obj[currentConditions.temp] = json.currentConditions?.temp
+      2. json.days[0].hours[23].temp
+    */
+
+    const arr = field.split(".");
+    arr.reduce((json, splitStr) => {
+      const value = json[splitStr];
+      if (value != undefined) {
+        obj[field] = value;
+      } else {
+        const objField = obj[field];
+        if (objField) {
+          obj[field] = objField[splitStr];
+        }
+      }
+      return obj;
+    }, json);
+
     return obj;
   }, {});
 
-  console.log(extractedData);
+  console.log("extractedData obj: ", extractedData);
   return extractedData;
 }
 

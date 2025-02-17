@@ -1,4 +1,17 @@
-- Need to extract data from a nested json, these are 2 ways to extract it, however the way I'm trying to extract data, this might need the obj check first & then assign to our extractedData obj.
+--- Details about the API
+- The Visual Crossing Weather API gives the data for 15 days incl. current day
+- days - Array of objects
+- hours - Array of objects
+- Example: Temp at hour 23:00
+  - json.days[0].hours[23].temp
+  - json.days[dayCount].hours[hourOfDay].datetime
+  - days[dayCount]; returns object
+    - dayCount ∈ W ∩ [0,14]
+  - hours[hourOfDay]; returns object
+    - hourOfDay ∈ W ∩ [0,23]
+---
+
+- Need to extract data from a nested json, these are the 2 ways to extract it, however the way I'm trying to extract data, this might need the obj check first & then assign to our extractedData obj.
   ```js
     json[currentConditions][temp]
     json.currentConditions.temp
