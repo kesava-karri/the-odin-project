@@ -48,3 +48,34 @@ body {
   align-items: center;
   border-radius: 20px;
 }
+
+.inner-container {
+  display: grid;
+  grid-template-columns: 2fr repeat(5, 6em);
+  /* grid-template-rows: repeat(7, 6em); */
+  grid-auto-rows: 5em;
+  gap: 6px;
+}
+
+.forecast-header {
+  display: contents;
+}
+
+.forecast-header p {
+  font-weight: bold;
+  background: #f0f0f0;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.forecast {
+  display: contents;
+  grid-template-columns: repeat(6, 6em);
+  grid-template-rows: auto;
+}
+
+.forecast p {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: center;
+}

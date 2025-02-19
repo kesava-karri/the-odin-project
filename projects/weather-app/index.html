@@ -14,25 +14,45 @@
         <div class="form-container">
           <form>
             <label for="location">Enter the location: </label>
-            <input type="text" name="location" id="location" />
-            <button type="submit">Click me!</button>
+            <input
+              type="text"
+              name="location"
+              id="location"
+              placeholder="Seattle"
+              value=""
+            />
+            <button class="submit-btn">Click me!</button>
           </form>
         </div>
       </div>
       <div class="current-forecast-container">
         <h4>Current forecast</h4>
-        <p>Seattle Min: Max: Precp prob:</p>
-        <p>Sunrise: Sunset:</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi</p>
+        <p class="address"></p>
+        <p>Current Temperature: <span class="current-temp"></span>°F</p>
+        <p>Today's Date: <span class="current-date current"></span></p>
+        <p>Today's Min: <span class="current-min current"></span>°F</p>
+        <p>Today's Max: <span class="current-max current"></span>°F</p>
+        <p>
+          Precipitation Prob.(%): <span class="current-precp current"></span>
+        </p>
+        <p>Sunrise: <span class="current-sunrise current"></span></p>
+        <p>Sunset: <span class="current-sunset current"></span></p>
       </div>
       <div class="week-forecast-container">
-        <h4>This week's forecast</h4>
-        <p>Day: Min: Max: precipication prob.:</p>
-        <p>Day: Min: Max: precipication prob.:</p>
-        <p>Day: Min: Max: precipication prob.:</p>
-        <p>Day: Min: Max: precipication prob.:</p>
-        <p>Day: Min: Max: precipication prob.:</p>
-        <p>Day: Min: Max: precipication prob.:</p>
+        <h4>Forecast for the upcoming six days</h4>
+        <p class="description"></p>
+
+        <div class="inner-container">
+          <div class="forecast-header">
+            <p>Date</p>
+            <p>Min(°F)</p>
+            <p>Max(°F)</p>
+            <p>Precip.(%)</p>
+            <p>Sunrise</p>
+            <p>Sunset</p>
+          </div>
+          <!-- The next 6 days will be appended-->
+        </div>
       </div>
     </div>
   </body>
