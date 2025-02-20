@@ -16,6 +16,12 @@ async function getWeatherInfoAPI(location) {
 const form = document.querySelector("form");
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
+  let weatherForecast = document.querySelector(".weather-forecast");
+  // Remove previously appended weather info if present
+  while (weatherForecast.hasChildNodes()) {
+    weatherForecast.removeChild(weatherForecast.firstChild);
+  }
+
   const inputLocation = document.querySelector("#location");
   const userQueryLocation = inputLocation.value.trim() || "Seattle";
   inputLocation.placeHolder = userQueryLocation;
@@ -35,12 +41,11 @@ form.addEventListener("submit", async (event) => {
     item.textContent = days0[index];
   });
   let weekContainer = document.querySelector(".week-forecast-container");
-  let innerContainer = document.querySelector(".inner-container");
   // Only for the next 6 days
   for (let i = 0; i < 7; i++) {
-    innerContainer.appendChild(briefWeather(grabDeets(extractedData.days[i])));
+    weatherForecast.appendChild(briefWeather(grabDeets(extractedData.days[i])));
   }
-  weekContainer.appendChild(innerContainer);
+  weekContainer.appendChild(weatherForecast);
 });
 
 function briefWeather(input) {

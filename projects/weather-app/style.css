@@ -38,7 +38,6 @@ body {
   flex-direction: column;
   align-items: center;
   border-radius: 20px;
-
 }
 
 .week-forecast-container {
@@ -51,8 +50,14 @@ body {
 
 .inner-container {
   display: grid;
-  grid-template-columns: 2fr repeat(5, 6em);
-  /* grid-template-rows: repeat(7, 6em); */
+  grid-template-columns: repeat(6, 6em);
+  grid-auto-rows: 5em;
+  gap: 6px;
+}
+
+.weather-forecast {
+  display: grid;
+  grid-template-columns: repeat(6, 6em);
   grid-auto-rows: 5em;
   gap: 6px;
 }
@@ -75,7 +80,7 @@ body {
 }
 
 .forecast p {
-  padding: 10px;
+  padding-top: 16px;
   border: 1px solid #ccc;
   text-align: center;
 }

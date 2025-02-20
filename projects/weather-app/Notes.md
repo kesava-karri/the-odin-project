@@ -1,5 +1,5 @@
 --- Issues:
-- Clear the old values when a new location is entered :)
+- [ x ] Clear the old values when a new location is entered :)
 
 --- Things that can be added in future
 - Error handling
