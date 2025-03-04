@@ -13,7 +13,6 @@ export default class HashMap {
 
   #hash(key) {
     let hashCode = 0;
-
     const primeNumber = 31;
     for (let i = 0; i < key.length; i++) {
       hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % this.#capacity;
@@ -22,11 +21,39 @@ export default class HashMap {
   }
 
   set(key, value) {
-    const hashCode = this.#hash(key);
-    const nd = new Node(key, value);
-    let bucket = this.bucketContainer[hashCode];
-    let curr;
+    if (this.length() >= this.#loadFactor * this.#capacity && !this.has(key)) {
+      // Double the capacity when the product of loadFactor & capacity is less than the number of entries
+      this.#capacity = 2 * this.#capacity;
+      let newContainer = new Array(this.#capacity);
 
+      // Copy the old data into the `newContainer`
+      // Iterate over the oldContainer
+      for (const oldBucket of this.bucketContainer) {
+        if (oldBucket) {
+          let curr = oldBucket.head;
+          while (curr) {
+            // Find the updated hashCode as the capacity has been changed
+            let hashCode = this.#hash(curr.key);
+            this.#set(curr.key, curr.value, newContainer, hashCode);
+            curr = curr.nextNode;
+          }
+        }
+      }
+      // One copying the old data is finished, add the new key, value pair
+      this.#set(key, value, newContainer);
+      this.bucketContainer = newContainer;
+    } else {
+      this.#set(key, value);
+    }
+  }
+
+  #set(key, value, newContainer = null, newHash = null) {
+    let hashCode = newHash ? newHash : this.#hash(key);
+    const nd = new Node(key, value);
+    let bucket = newContainer
+      ? newContainer[newHash]
+      : this.bucketContainer[hashCode];
+    let curr;
     if (bucket === undefined) {
       bucket = new LinkedList(nd);
     } else {
@@ -50,8 +77,12 @@ export default class HashMap {
         curr.nextNode = nd;
       }
     }
-
-    this.bucketContainer[hashCode] = bucket;
+    if (newContainer) {
+      newContainer[hashCode] = bucket;
+      this.bucketContainer = newContainer;
+    } else {
+      this.bucketContainer[hashCode] = bucket;
+    }
   }
 
   get(key) {
@@ -130,7 +161,7 @@ export default class HashMap {
    * The `clear()` method removes all entries in the hashmap
    */
   clear() {
-    if (bucketContainer.size() > 0) {
+    if (this.bucketContainer.length > 0) {
       this.bucketContainer = new Array(this.#capacity);
     }
   }
@@ -183,7 +214,7 @@ export default class HashMap {
   }
 
   /**
-   * A private method to find values/keys based on the input
+   * A private method to find values, keys, entries or length based on the input operation
    */
   #processNodes(operation) {
     let container = this.bucketContainer;

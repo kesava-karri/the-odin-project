@@ -2,9 +2,12 @@
 
 - Having a bucket with only one Node is kinda not scalable, so we need to save the values in a such a way that while retrieval we can still differentiate those values with different keys :); the `hashCode` would only help us to know which bucket we need to go!
 
-- Initially I've assumed to set the capacity size but since they're the current number of buckets it needs to be dynamic to calculate the proper growth factor
-
 ### Notes
+
+- Quick Ref:
+
+  - bucketContainer => Array
+  - bucket => LinkedList (imported from ../linked-lists/LinkedList.js)
 
 - We find the `hashCode` to see which bucket the current key belongs to!
 
