@@ -7,14 +7,31 @@ class Node {
   }
 }
 
-class LinkedList {
+/**
+ * @class
+ * @method append(value) // value can be a hashmap's node
+ * @method prepend(value)
+ * @method size()
+ * @method tail()
+ * @method at(index)
+ * @method pop()
+ * @method contains(value)
+ * @method find(value)
+ * @method toString()
+ * @method insertAt {value, index}
+ * @method removeAt(index)
+ */
+export default class LinkedList {
   constructor(head) {
+    this.head = head;
+    /* Commenting the below as I'm using new Node structure to implement hashmap & importing this LinkedList :)
     if (head instanceof Node) {
       this.head = head;
     } else {
       throw new Error("It ain't bussin' bruh, need obj of Node class");
-    }
+    }*/
   }
+
   append(value) {
     if (!this.head) {
       this.head = new Node();
@@ -28,8 +45,13 @@ class LinkedList {
       currNode = currNode.nextNode;
     }
     // append the new node with the given value & making this the new tail node
-    const newNode = new Node(value);
-    currNode.nextNode = newNode;
+    if (this.head instanceof Node) {
+      const newNode = new Node(value);
+      currNode.nextNode = newNode;
+    } else {
+      // This case is for hashmap usage, the value would be a node instead of single value :)
+      currNode.nextNode = value;
+    }
     return -1;
   }
 
@@ -114,6 +136,7 @@ class LinkedList {
 
   toString() {
     const currNode = this.head;
+    if (currNode === null) return null;
     let res = "".concat(`( ${currNode.value} )`);
     let next = currNode.nextNode;
     const arrow = "->";
@@ -192,52 +215,57 @@ class LinkedList {
   }
 }
 
-// /*
-// ---- Append ----
-const head = new Node(2);
-let ll = new LinkedList(head);
-ll.append(5);
-ll.append(43567647);
-console.log("append(value): ", ll.toString()); // ( 2 ) -> ( 5 ) -> ( 43567647 )
+function test() {
+  // --- Append ---
+  const head = new Node(2);
+  let ll = new LinkedList(head);
+  ll.append(5);
+  ll.append(43567647);
+  console.log("append(value): ", ll.toString()); // ( 2 ) -> ( 5 ) -> ( 43567647 )
 
-// --- Prepend ---
-ll.prepend(102);
-console.log("prepend(value): ", ll.toString()); // ( 102 ) -> ( 2 ) -> ( 5 ) -> ( 43567647 )
+  // --- Prepend ---
+  ll.prepend(102);
+  console.log("prepend(value): ", ll.toString()); // ( 102 ) -> ( 2 ) -> ( 5 ) -> ( 43567647 )
 
-// --- Size ---
-console.log("size: ", ll.size()); // 4
+  // --- Size ---
+  console.log("size: ", ll.size()); // 4
 
-// --- Head ---
-console.log("head: ", ll.head);
+  // --- Head ---
+  console.log("head: ", ll.head);
 
-// --- Tail ---
-console.log("tail node: ", ll.tail());
+  // --- Tail ---
+  console.log("tail node: ", ll.tail());
 
-// --- at(index) ---
-console.log("at(index):", ll.at(0));
-console.log("at(index):", ll.at(1));
-console.log("at(index):", ll.at(2));
+  // --- at(index) ---
+  console.log("at(index):", ll.at(0));
+  console.log("at(index):", ll.at(1));
+  console.log("at(index):", ll.at(2));
 
-// --- Pop ---
-console.log(ll.toString());
-console.log("pop: ", ll.pop());
-console.log(ll.toString());
+  // --- Pop ---
+  console.log(ll.toString());
+  console.log("pop: ", ll.pop());
+  console.log(ll.toString());
 
-// --- Contains ---
-console.log("pop: ", ll.contains(2));
-console.log(ll.toString());
+  // --- Contains ---
+  console.log("contains: ", ll.contains(2)); // true
+  console.log("contains: ", ll.contains(5)); // true
+  console.log("contains: ", ll.contains(102)); // true
+  console.log("contains: ", ll.contains(1024)); // false
+  console.log(ll.toString());
 
-// --- Find ---
-console.log("find; index: ", ll.find(102));
+  // --- Find ---
+  console.log("find; index: ", ll.find(102));
 
-// --- toString() ---
-console.log("toString: ", ll.toString());
+  // --- toString() ---
+  console.log("toString: ", ll.toString());
 
-// --- insertAt(value, index) ---
-ll.insertAt(619, 2);
-console.log("After insertAt(value, index): \n", ll.toString());
+  // --- insertAt(value, index) ---
+  ll.insertAt(619, 2);
+  console.log("After insertAt(value, index): \n", ll.toString());
 
-// --- removeAt(index) ---
-ll.removeAt(2);
-console.log("After removeAt(index): \n", ll.toString());
-// */
+  // --- removeAt(index) ---
+  ll.removeAt(2);
+  console.log("After removeAt(index): \n", ll.toString());
+}
+
+// test();
