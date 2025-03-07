@@ -5,6 +5,7 @@
 - Note: You’ll build a balanced BST in this assignment. Do not use duplicate values because they make it more complicated and result in trees that are much harder to balance. Therefore, be sure to always remove duplicate values or check for an existing value before inserting.
 
 - While implementing delete, there can be many cases;
+
   - No children (leaf node)
   - One child
   - Two children :)
@@ -14,6 +15,14 @@
     - And that someone should be the next biggest number; which
       would be the left most node on the right subtree to still maintain the BST ordering rule;
   - Checkout [this](https://youtu.be/wcIRPqTR3Kc?si=ItoB_OZP34vyyIkG) video to understand visually w an example BST
+
+- Great Viz tool for Binary Search Tree & most of it's operations - [link](https://visualgo.net/en/bst);
+
+- Height is defined as the number of edges in the longest path from a given node to a leaf node.
+  - The fundamental concept of tree height calculation is:
+    - The height of a null node should be -1
+    - The height of a leaf node should be 0
+    - For any other node, its height is 1 + the maximum height of its children
 
 ### learnings thru mistakes
 

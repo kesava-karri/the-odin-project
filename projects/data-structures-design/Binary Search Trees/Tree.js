@@ -130,6 +130,12 @@ export default class Tree {
     return curr;
   }
 
+  /**
+   * Give a number & `find()` method would return it's corresponding node along
+   * w the entire subtree of it; if it exists
+   * @param {number} value
+   * @returns `TreeNode`
+   */
   find(value) {
     return this.#findRec(value, this.root);
   }
@@ -147,6 +153,9 @@ export default class Tree {
     return this.#findRec(value, curr.right);
   }
 
+  /**
+   * callback fn is included as per the requirement
+   */
   levelOrder(callback) {
     if (!callback) {
       throw new Error(
@@ -169,6 +178,138 @@ export default class Tree {
         }
       }
     }
+  }
+
+  inOrder(callback) {
+    if (!callback)
+      throw new Error(
+        `callback function is required; ${callback} was provided`
+      );
+    if (!this.root) return;
+    // inOrder => Left Root Right
+    this.#inOrderRec(callback, this.root);
+  }
+
+  #inOrderRec(callback, curr) {
+    if (curr === null) return;
+    if (curr.left) this.#inOrderRec(callback, curr.left);
+    callback(curr);
+    if (curr.right) this.#inOrderRec(callback, curr.right);
+  }
+
+  preOrder(callback) {
+    if (!callback)
+      throw new Error(
+        `callback function is required; ${callback} was provided`
+      );
+
+    if (!this.root) return;
+    // preOrder => Root Left Right
+    this.#preOrderRec(callback, this.root);
+  }
+
+  #preOrderRec(callback, curr) {
+    if (curr === null) return;
+    callback(curr);
+    if (curr.left) this.#preOrderRec(callback, curr.left);
+    if (curr.right) this.#preOrderRec(callback, curr.right);
+  }
+
+  postOrder(callback) {
+    if (!callback)
+      throw new Error(
+        `callback function is required; ${callback} was provided`
+      );
+
+    if (!this.root) return;
+    // postOrder => Left Right Root
+    this.#postOrderRec(callback, this.root);
+  }
+
+  #postOrderRec(callback, curr) {
+    if (curr === null) return;
+    if (curr.left) this.#postOrderRec(callback, curr.left);
+    if (curr.right) this.#postOrderRec(callback, curr.right);
+    callback(curr);
+  }
+
+  /**
+   * Height is defined as the number of edges in the longest path from a given node to a leaf node.
+   * @param {TreeNode} node
+   */
+  height(node) {
+    // I believe post-order accesses the root in the end; thereby reaching the leaf node quicker
+    if (node == null)
+      throw new Error(`Please provide a valid node; given: ${node}`);
+    let curr = this.find(node.value);
+
+    return curr !== null
+      ? this.#heightRec(curr)
+      : `${node.value} node doesn't exist in the given BST`;
+  }
+
+  #heightRec(curr) {
+    if (curr === null) return -1;
+
+    let leftHeight = this.#heightRec(curr.left);
+    let rightHeight = this.#heightRec(curr.right);
+
+    // + 1 is edge height to it's chosen heir :p
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
+
+  /**
+   * Depth is defined as the number of edges in the path from a given node to the tree’s root node.
+   */
+  depth(node) {
+    if (node == null)
+      throw new Error(`Please provide a proper node; given: ${node}`);
+
+    return this.#depthRec(this.root, node.value, 0);
+  }
+
+  #depthRec(curr, value, currentDepth) {
+    if (curr == null) return -1;
+    if (value < curr.value) {
+      // Since in BST, the values follow the order & if this condition is satisfied then the value we're looking for must be in the left sub tree
+      if (curr.left) {
+        return this.#depthRec(curr.left, value, ++currentDepth);
+      }
+    } else if (value > curr.value) {
+      if (curr.right) return this.#depthRec(curr.right, value, ++currentDepth);
+    } else if (value === curr.value) return currentDepth;
+
+    return `${value} not found, given value doesn't exist in the BST`;
+  }
+
+  /**
+   * A balanced tree is one where the difference between heights of the left subtree and the right subtree of every node is not more than 1.
+   */
+  isBalanced() {
+    return this.#isBalancedRec(this.root) !== -1;
+  }
+
+  #isBalancedRec(curr) {
+    if (curr === null) return 0;
+
+    const leftHeight = this.#isBalancedRec(curr.left);
+    if (leftHeight === -1) return -1;
+    const rightHeight = this.#isBalancedRec(curr.right);
+    if (rightHeight === -1) return -1;
+
+    const heightDiff = Math.abs(leftHeight - rightHeight);
+    if (heightDiff > 1) return -1;
+
+    return 1 + Math.max(leftHeight, rightHeight);
+  }
+
+  rebalance() {
+    if (!this.root) return;
+
+    const values = [];
+    this.inOrder((node) => values.push(node.value));
+
+    this.root = this.#buildTree(values);
   }
 }
 
@@ -212,13 +353,45 @@ function test() {
   // bst.deleteItem(4);
   // bst.deleteItem(67);
   bst.deleteItem(8);
-
+  /*
   // find()
   // console.log(bst.find(7));
 
-  prettyPrint(bst.root);
+  // levelOrder()
   // Sample callback fn is included as per the requirement
   bst.levelOrder((node) => console.log(node.value));
+
+  // inOrder()
+  bst.inOrder((node) => process.stdout.write(node.value.toString() + ' '));
+  console.log();
+
+  // preOrder()
+  bst.preOrder((node) => process.stdout.write(node.value.toString() + ' '));
+  console.log();
+
+  // postOrder()
+  bst.postOrder((node) => process.stdout.write(node.value.toString() + ' '));
+
+  // height
+  console.log(bst.height(new TreeNode(1)));
+  console.log(bst.height(new TreeNode(23)));
+  console.log(bst.height(new TreeNode(9)));
+  console.log(bst.height(new TreeNode(67)));
+  console.log(bst.height(new TreeNode(100)));
+
+  // depth
+  console.log(bst.depth(new TreeNode(9)));
+  console.log(bst.depth(new TreeNode(4)));
+  console.log(bst.depth(new TreeNode(40)));
+  console.log(bst.depth(new TreeNode(324)));
+  */
+  // isBalanced()
+  console.log(bst.isBalanced());
+
+  // rebalance()
+  prettyPrint(bst.root);
+  bst.rebalance();
+  prettyPrint(bst.root);
 }
 
-test();
+// test();
