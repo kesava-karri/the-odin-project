@@ -7,3 +7,5 @@ node_modules/
 extras/
 myNotes.md
 /.idea/
+.vscode/
+coverage/
