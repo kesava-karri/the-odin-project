@@ -18,7 +18,7 @@ const config = {
   // clearMocks: false,
 
   // Indicates whether the coverage information should be collected while executing the test
-  collectCoverage: false,
+  collectCoverage: true,
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   // collectCoverageFrom: undefined,
@@ -37,8 +37,8 @@ const config = {
   // A list of reporter names that Jest uses when writing coverage reports
   coverageReporters: [
   //   "json",
-    // "text",
-    // "text-summary",
+    "text",
+    "text-summary",
   //   "lcov",
   //   "clover"
   ],
