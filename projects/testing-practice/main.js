@@ -100,9 +100,30 @@ const processDecimalCode = (shiftFactor, currChar) => {
   return decimalCode;
 }
 
+const analyzeArray = (input) => {
+  const isNeitherNumNorNAN = (element) => typeof element !== "number" || Number.isNaN(element);
+  if (!Array.isArray(input) || 
+      input.some(isNeitherNumNorNAN) ||
+      input.length === 0)
+    throw new TypeError("input must be an array & contain numbers");
+
+  let min = Number.MAX_SAFE_INTEGER;
+  let max = Number.MIN_SAFE_INTEGER;
+  
+  let average = input.reduce((average, num) => {
+    if (num < min) min = num;
+    if (num > max) max = num;
+    return average + num;
+  }, 0);
+  average /= input.length;
+  
+  return { min, max, length: input.length, average };
+}
+
 export { 
   capitalize,
   reverseString,
   Calculator,
   caesarCipher,
+  analyzeArray
 };

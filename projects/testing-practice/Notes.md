@@ -16,3 +16,4 @@
 - When `npm test` literally means `npm run jest` (assuming "test": "jest" is defined in package.json) why does the latter throw error?
  - When we run `npm run jest` it literally checks for a script named _jest_ in the package.json & not the __Jest__ pacakge
  - So if you'd still like to make it work, have a new property `"jest" : "jest"` & it would help you run the command `npm run jest` :)
+- When we split a function into multiple chunks of helper functions, we do not need to write the test for each & every function we write. We just need to write it for the public ones

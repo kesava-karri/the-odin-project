@@ -3,6 +3,7 @@ import {
   reverseString, 
   Calculator, 
   caesarCipher,
+  analyzeArray
 } from './main.js';
 
 describe('capitalize', function () {
@@ -167,5 +168,47 @@ describe('caesarCipher', () => {
 
   it('out of bounds shift factor', () => {
     expect(caesarCipher('GGWP', 52)).toBe('GGWP');
+  });
+});
+
+describe('analyzeArray', () => {
+  it('random', () => {
+    expect(analyzeArray([1,8,3,4,2,6])).toStrictEqual({ average: 4, min: 1, max: 8, length: 6 }); 
+  });
+
+  it('single element', () => {
+    expect(analyzeArray([4])).toStrictEqual(
+      { average: 4, min: 4, max: 4, length:1 }
+    )
+  });
+  
+  it('Invalid input', () => {
+    expect(() => analyzeArray(4)).toThrow(new TypeError("input must be an array & contain numbers"));
+  });
+  
+  it('Empty Array', () => {
+    expect(() => analyzeArray([])).toThrow(new TypeError("input must be an array & contain numbers"));
+  });
+
+  it('contains non-number values', () => {
+    expect(() => analyzeArray(['a', 2, 3])).toThrow(new TypeError("input must be an array & contain numbers"));
+  });
+  
+  it('sorted ascending', () => {
+    expect(analyzeArray([1, 2, 3, 4, 5])).toStrictEqual(
+      { average: 3, min: 1, max: 5, length: 5 }
+    );
+  });
+
+  it('sorted descending', () => {
+    expect(analyzeArray([5, 4, 3, 2, 1])).toStrictEqual(
+      { average: 3, min: 1, max: 5, length: 5 }
+    );
+  });
+
+  it('all zeroes', () => {
+    expect(analyzeArray([0, 0, 0])).toStrictEqual(
+      { average: 0, min: 0, max: 0, length: 3 }
+    );
   });
 });
