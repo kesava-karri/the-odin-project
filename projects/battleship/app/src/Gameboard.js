@@ -10,11 +10,17 @@ import { create2DArray, fillInBuffer, Direction, TileType } from './helper';
 
 export default class Gameborad {
   constructor() {
-    this.board = create2DArray(TileType.EMPTY);
+    this.shipGrid = create2DArray(TileType.EMPTY);
+    this.attackGrid = create2DArray(TileType.EMPTY);
+
+    this.ships = [];
   }
 
   // Note: `direction` is defaulted to horizontal, so we don't have to pass in the direction everytime when this method is called
-  placeShip(shipLen, row, col, direction = Direction.Horizontal) {
+  placeShip(ship, row, col, direction = Direction.Horizontal) {
+    const shipLen = ship.length;
+    this.ships.push(ship);
+
     if (!Object.values(Direction).includes(direction)) {
       throw new Error(
         'Invalid direction, use Direction.Horizontal or Direction.Vertical'
@@ -54,11 +60,11 @@ export default class Gameborad {
 
     while (counter++ < shipLen) {
       // TileType.SHIP indicates that the grid is occupied by part of the ship
-      this.board[inputRow][inputCol] = TileType.SHIP;
+      this.shipGrid[inputRow][inputCol] = TileType.SHIP;
       inputRow += dr;
       inputCol += dc;
     }
-    fillInBuffer(this.board, shipLen, row - 1, col - 1, direction);
+    fillInBuffer(this.shipGrid, shipLen, row - 1, col - 1, direction);
   }
 
   #checkBufferZone(shipLen, inputRow, inputCol, direction) {
@@ -68,7 +74,7 @@ export default class Gameborad {
     const dc = direction === Direction.Horizontal ? 1 : 0;
 
     while (counter++ < shipLen) {
-      if (this.board[inputRow][inputCol] === TileType.BUFFER) {
+      if (this.shipGrid[inputRow][inputCol] === TileType.BUFFER) {
         return true;
       }
       inputRow += dr;
@@ -83,7 +89,7 @@ export default class Gameborad {
     const flag = false;
 
     while (counter++ < shipLen) {
-      if (this.board[row][col] === TileType.SHIP) {
+      if (this.shipGrid[row][col] === TileType.SHIP) {
         return { row, col, flag: true };
       }
       row += dr;
@@ -92,11 +98,26 @@ export default class Gameborad {
     return { flag };
   }
 
+  receiveAttack(ship, row, col) {
+    const r = row - 1;
+    const c = col - 1;
+    if (this.shipGrid[r][c] === TileType.SHIP) {
+      this.attackGrid[r][c] = TileType.HIT;
+      ship.hit();
+    } else {
+      this.attackGrid[r][c] = TileType.MISS;
+    }
+  }
+
   toString() {
-    const rows = this.board;
+    const rows = this.shipGrid;
     process.stdout.write('--- Gameboard ---\n');
     for (const row of rows) {
       process.stdout.write(`${row}\n`);
     }
+  }
+
+  allShipsSunk() {
+    return this.ships.every((ship) => ship.isSunk());
   }
 }

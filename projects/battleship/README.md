@@ -5,7 +5,7 @@
 
 ### Skills Demostrated
 
-- Built the project using TDD (No DOM manipulation or UI)
+- Built the project using TDD (Not relying on `console.log` or DOM manipulation)
 -
 
 ### Read my insights about grid [here]()

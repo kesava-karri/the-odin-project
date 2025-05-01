@@ -10,14 +10,14 @@
 
 ### TODOs (Written on the go)
 
-- // TODO: don't occupy the same coordinates
-
-  - ~The ship placement should never overlap (not even one single block of it)~
-  - No ships should be placed around another ship meaning we need to leave a block space of one around every ship that's placed on the board
-
 - // TODO: check we don't go out of bounds
 
 #### Done
+
+- // TODO: don't occupy the same coordinates
+
+  - ~The ship placement should never overlap (not even one single block of it)~
+  - ~No ships should be placed around another ship meaning we need to leave a block space of one around every ship that's placed on the board~
 
 -- // TODO: Gameboard - Save the coordinates while placing the ship - 2D Array & new ship values should be enough to cross check that no overlap occurs
 

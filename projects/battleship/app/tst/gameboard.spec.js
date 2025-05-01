@@ -5,6 +5,7 @@ import {
   fillSpecificValues,
   Direction,
   print2DArray,
+  TileType,
 } from '../src/helper';
 
 describe('Gameboard', () => {
@@ -13,7 +14,7 @@ describe('Gameboard', () => {
     gameboard = new Gameboard();
   });
   it('init', () => {
-    expect(gameboard.board).toStrictEqual(create2DArray());
+    expect(gameboard.shipGrid).toStrictEqual(create2DArray());
   });
 
   describe('Ship length 4', () => {
@@ -31,11 +32,9 @@ describe('Gameboard', () => {
         Direction.Horizontal
       );
       // Act
-      gameboard.placeShip(ship1.length, 2, 4);
+      gameboard.placeShip(ship2, 2, 4);
       // Test
-      // print2DArray(expectedArr);
-      // gameboard.toString();
-      expect(gameboard.board).toStrictEqual(expectedArr);
+      expect(gameboard.shipGrid).toStrictEqual(expectedArr);
     });
 
     it('Ship Len 4 - Vertical', () => {
@@ -47,9 +46,9 @@ describe('Gameboard', () => {
         Direction.Vertical
       );
       // Act
-      gameboard.placeShip(ship1.length, 6, 4, Direction.Vertical);
+      gameboard.placeShip(ship1, 6, 4, Direction.Vertical);
       // Test
-      expect(gameboard.board).toStrictEqual(expectedArr);
+      expect(gameboard.shipGrid).toStrictEqual(expectedArr);
     });
 
     it('Ship Len 4 - Overlap positions', () => {
@@ -61,15 +60,10 @@ describe('Gameboard', () => {
 
       // The above coordinates would overlap at (4, 8)
       const expectedCollisionRow = 4;
-      gameboard.placeShip(ship1.length, rowShip1, colShip1);
+      gameboard.placeShip(ship1, rowShip1, colShip1);
 
       expect(() =>
-        gameboard.placeShip(
-          ship2.length,
-          rowShip2,
-          colShip2,
-          Direction.Vertical
-        )
+        gameboard.placeShip(ship2, rowShip2, colShip2, Direction.Vertical)
       ).toThrow(
         new Error(
           `The tile at row: ${expectedCollisionRow} & col: ${colShip2} is already occupied`
@@ -78,16 +72,58 @@ describe('Gameboard', () => {
     });
 
     it('Ship Len 4 - No placement around surroundings', () => {
-      gameboard.placeShip(ship1.length, 5, 5);
+      gameboard.placeShip(ship1, 5, 5);
       expect(() => {
-        gameboard.placeShip(ship2.length, 4, 5);
+        gameboard.placeShip(ship2, 4, 5);
       }).toThrow(new Error('Trying to place in the surroundings'));
     });
-  });
 
-  /*
-    it('add a ship of length 3 to the gameboard', () => {});
-    it('add a ship of length 2 to the gameboard', () => {});
-    it('add a ship of length 1 to the gameboard', () => {});
-  */
+    it('marks a hit when ship is at position', () => {
+      gameboard.placeShip(ship1, 2, 4);
+      gameboard.receiveAttack(ship1, 2, 4);
+      expect(gameboard.attackGrid[1][3]).toBe(TileType.HIT);
+      expect(ship1.getNumberOfHits()).toBe(1);
+    });
+
+    it('ship is not sunk after one hit', () => {
+      gameboard.placeShip(ship1, 2, 4);
+      gameboard.receiveAttack(ship1, 2, 4);
+      expect(ship1.isSunk()).toBe(false);
+    });
+
+    it('ship is sunk after all positions are hit', () => {
+      gameboard.placeShip(ship1, 2, 4);
+      gameboard.receiveAttack(ship1, 2, 4);
+      gameboard.receiveAttack(ship1, 2, 5);
+      gameboard.receiveAttack(ship1, 2, 6);
+      gameboard.receiveAttack(ship1, 2, 7);
+      expect(ship1.isSunk()).toBe(true);
+    });
+
+    it('tracks missed shots', () => {
+      gameboard.placeShip(ship1, 2, 4);
+      gameboard.receiveAttack(ship1, 3, 4); // Miss
+      expect(gameboard.attackGrid[2][3]).toBe(TileType.MISS);
+    });
+
+    it('all ships are sunk when all ships are hit', () => {
+      gameboard.placeShip(ship1, 2, 4);
+      gameboard.placeShip(ship2, 6, 4, Direction.Vertical);
+
+      // Hit all positions of ship1
+      gameboard.receiveAttack(ship1, 2, 4);
+      gameboard.receiveAttack(ship1, 2, 5);
+      gameboard.receiveAttack(ship1, 2, 6);
+      gameboard.receiveAttack(ship1, 2, 7);
+
+      // Hit all positions of ship2
+      gameboard.receiveAttack(ship2, 6, 4);
+      gameboard.receiveAttack(ship2, 7, 4);
+      gameboard.receiveAttack(ship2, 8, 4);
+      gameboard.receiveAttack(ship2, 9, 4);
+
+      expect(ship1.isSunk()).toBe(true);
+      expect(ship2.isSunk()).toBe(true);
+    });
+  });
 });

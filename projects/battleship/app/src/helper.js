@@ -5,6 +5,8 @@ const TileType = {
   SHIP: 1,
   // BUFFER indicates the space surrounding a ship
   BUFFER: 2,
+  HIT: 3,
+  MISS: 4,
 };
 
 const Direction = {
