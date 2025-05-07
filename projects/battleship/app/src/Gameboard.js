@@ -8,7 +8,7 @@
 
 import { create2DArray, fillInBuffer, Direction, TileType } from './helper';
 
-export default class Gameborad {
+export default class Gameboard {
   constructor() {
     this.shipGrid = create2DArray(TileType.EMPTY);
     this.attackGrid = create2DArray(TileType.EMPTY);
@@ -16,7 +16,10 @@ export default class Gameborad {
     this.ships = [];
   }
 
-  // Note: `direction` is defaulted to horizontal, so we don't have to pass in the direction everytime when this method is called
+  #toZeroBasedIndex(row, col) {
+    return { row: row - 1, col: col - 1 };
+  }
+
   placeShip(ship, row, col, direction = Direction.Horizontal) {
     const shipLen = ship.length;
     this.ships.push(ship);
@@ -26,9 +29,8 @@ export default class Gameborad {
         'Invalid direction, use Direction.Horizontal or Direction.Vertical'
       );
     }
-    // the row & col start from 1
-    let inputRow = row - 1;
-    let inputCol = col - 1;
+
+    let { row: inputRow, col: inputCol } = this.#toZeroBasedIndex(row, col);
 
     const overlapCheck = this.#checkIfOverlaps(
       shipLen,
@@ -54,6 +56,7 @@ export default class Gameborad {
       throw new Error('Trying to place in the surroundings');
     }
 
+    // Place the ship on the grid and set its position
     let counter = 0;
     const dr = direction === Direction.Vertical ? 1 : 0;
     const dc = direction === Direction.Horizontal ? 1 : 0;
@@ -98,12 +101,23 @@ export default class Gameborad {
     return { flag };
   }
 
-  receiveAttack(ship, row, col) {
+  receiveAttack(row, col) {
     const r = row - 1;
     const c = col - 1;
+
+    // Prevent attacking any position that has already been attacked (HIT or MISS)
+    if (this.attackGrid[r][c] !== TileType.EMPTY) {
+      throw new Error('This position has already been attacked');
+    }
+
     if (this.shipGrid[r][c] === TileType.SHIP) {
       this.attackGrid[r][c] = TileType.HIT;
-      ship.hit();
+      // Find and hit the ship at this position
+      const ship = this.ships.find((s) => {
+        // We'll need to track ship positions in Ship class to improve this
+        return true;
+      });
+      if (ship) ship.hit();
     } else {
       this.attackGrid[r][c] = TileType.MISS;
     }

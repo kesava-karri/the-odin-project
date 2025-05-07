@@ -16,6 +16,7 @@ const Direction = {
 
 function create2DArray(initialValue = 0, rows = 10, cols = 10) {
   let arr = [];
+  arr.fill().map(() => Array(cols).fill(initialValue));
   for (let i = 0; i < rows; i++) {
     arr[i] = [];
     for (let j = 0; j < cols; j++) {

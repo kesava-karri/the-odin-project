@@ -1,5 +1,6 @@
 export default class Ship {
   #beenHit = 0;
+
   constructor(length) {
     this.length = length;
   }
