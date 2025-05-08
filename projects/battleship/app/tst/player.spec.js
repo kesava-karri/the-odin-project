@@ -14,13 +14,21 @@ describe('Player', () => {
     expect(player.gameboard).toBeInstanceOf(Gameboard);
   });
 
-  it('can create a real player', () => {
-    const realPlayer = new Player(true);
-    expect(realPlayer.isComputer).toBe(false);
+  it('can create a human player with default name', () => {
+    const humanPlayer = new Player();
+    expect(humanPlayer.name).toBe('Player');
+    expect(humanPlayer.isComputer).toBe(false);
+  });
+
+  it('can create a human player with custom name', () => {
+    const humanPlayer = new Player('John');
+    expect(humanPlayer.name).toBe('John');
+    expect(humanPlayer.isComputer).toBe(false);
   });
 
   it('can create a computer player', () => {
-    const computerPlayer = new Player(false);
+    const computerPlayer = new Player('Computer', true);
+    expect(computerPlayer.name).toBe('Computer');
     expect(computerPlayer.isComputer).toBe(true);
   });
 

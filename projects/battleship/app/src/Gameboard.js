@@ -18,7 +18,7 @@ export default class Gameboard {
     this.shipPositions = new Map();
   }
 
-  #toZeroBasedIndex(row, col) {
+  toZeroBasedIndex(row, col) {
     return { row: row - 1, col: col - 1 };
   }
 
@@ -32,7 +32,7 @@ export default class Gameboard {
       );
     }
 
-    let { row: inputRow, col: inputCol } = this.#toZeroBasedIndex(row, col);
+    let { row: inputRow, col: inputCol } = this.toZeroBasedIndex(row, col);
 
     const overlapCheck = this.#checkIfOverlaps(
       shipLen,
