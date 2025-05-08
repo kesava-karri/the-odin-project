@@ -4,7 +4,6 @@ import {
   create2DArray,
   fillSpecificValues,
   Direction,
-  print2DArray,
   TileType,
 } from '../src/helper';
 
@@ -80,29 +79,29 @@ describe('Gameboard', () => {
 
     it('marks a hit when ship is at position', () => {
       gameboard.placeShip(ship1, 2, 4);
-      gameboard.receiveAttack(ship1, 2, 4);
+      gameboard.receiveAttack(2, 4);
       expect(gameboard.attackGrid[1][3]).toBe(TileType.HIT);
       expect(ship1.getNumberOfHits()).toBe(1);
     });
 
     it('ship is not sunk after one hit', () => {
       gameboard.placeShip(ship1, 2, 4);
-      gameboard.receiveAttack(ship1, 2, 4);
+      gameboard.receiveAttack(2, 4);
       expect(ship1.isSunk()).toBe(false);
     });
 
     it('ship is sunk after all positions are hit', () => {
       gameboard.placeShip(ship1, 2, 4);
-      gameboard.receiveAttack(ship1, 2, 4);
-      gameboard.receiveAttack(ship1, 2, 5);
-      gameboard.receiveAttack(ship1, 2, 6);
-      gameboard.receiveAttack(ship1, 2, 7);
+      gameboard.receiveAttack(2, 4);
+      gameboard.receiveAttack(2, 5);
+      gameboard.receiveAttack(2, 6);
+      gameboard.receiveAttack(2, 7);
       expect(ship1.isSunk()).toBe(true);
     });
 
     it('tracks missed shots', () => {
       gameboard.placeShip(ship1, 2, 4);
-      gameboard.receiveAttack(ship1, 3, 4); // Miss
+      gameboard.receiveAttack(3, 4); // Miss
       expect(gameboard.attackGrid[2][3]).toBe(TileType.MISS);
     });
 
@@ -111,16 +110,16 @@ describe('Gameboard', () => {
       gameboard.placeShip(ship2, 6, 4, Direction.Vertical);
 
       // Hit all positions of ship1
-      gameboard.receiveAttack(ship1, 2, 4);
-      gameboard.receiveAttack(ship1, 2, 5);
-      gameboard.receiveAttack(ship1, 2, 6);
-      gameboard.receiveAttack(ship1, 2, 7);
+      gameboard.receiveAttack(2, 4);
+      gameboard.receiveAttack(2, 5);
+      gameboard.receiveAttack(2, 6);
+      gameboard.receiveAttack(2, 7);
 
       // Hit all positions of ship2
-      gameboard.receiveAttack(ship2, 6, 4);
-      gameboard.receiveAttack(ship2, 7, 4);
-      gameboard.receiveAttack(ship2, 8, 4);
-      gameboard.receiveAttack(ship2, 9, 4);
+      gameboard.receiveAttack(6, 4);
+      gameboard.receiveAttack(7, 4);
+      gameboard.receiveAttack(8, 4);
+      gameboard.receiveAttack(9, 4);
 
       expect(ship1.isSunk()).toBe(true);
       expect(ship2.isSunk()).toBe(true);

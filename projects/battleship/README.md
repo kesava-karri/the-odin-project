@@ -6,7 +6,7 @@
 ### Skills Demostrated
 
 - Built the project using TDD (Not relying on `console.log` or DOM manipulation)
--
+- Decoupling business logic from UI components
 
 ### Read my insights about grid [here]()
 

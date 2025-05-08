@@ -14,6 +14,8 @@ export default class Gameboard {
     this.attackGrid = create2DArray(TileType.EMPTY);
 
     this.ships = [];
+    // {key: "row,col", value: ship}
+    this.shipPositions = new Map();
   }
 
   #toZeroBasedIndex(row, col) {
@@ -64,6 +66,7 @@ export default class Gameboard {
     while (counter++ < shipLen) {
       // TileType.SHIP indicates that the grid is occupied by part of the ship
       this.shipGrid[inputRow][inputCol] = TileType.SHIP;
+      this.shipPositions.set(`${inputRow},${inputCol}`, ship);
       inputRow += dr;
       inputCol += dc;
     }
@@ -112,11 +115,7 @@ export default class Gameboard {
 
     if (this.shipGrid[r][c] === TileType.SHIP) {
       this.attackGrid[r][c] = TileType.HIT;
-      // Find and hit the ship at this position
-      const ship = this.ships.find((s) => {
-        // We'll need to track ship positions in Ship class to improve this
-        return true;
-      });
+      const ship = this.shipPositions.get(`${r},${c}`);
       if (ship) ship.hit();
     } else {
       this.attackGrid[r][c] = TileType.MISS;
