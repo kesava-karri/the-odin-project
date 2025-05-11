@@ -10,11 +10,10 @@ A classic implementation of the Battleship game built with JavaScript, following
 
 - Classic 10x10 Battleship gameplay
 - Ships of varying sizes:
-  - Carrier (5)
-  - Battleship (4)
-  - Cruiser (3)
-  - Submarine (3)
-  - Destroyer (2)
+  - 1x Battleship (4)
+  - 2x Cruisers (3)
+  - 3x Destroyers (2)
+  - 4x Submarines (1)
 - Player vs Computer mode
 - Visual game board with hit/miss indicators
 - Persistent ship display on player's board

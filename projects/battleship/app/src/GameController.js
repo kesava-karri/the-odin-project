@@ -18,15 +18,27 @@ export default class GameController {
     // Create ships for both players (unique instances for each)
     const ships1 = [
       new Ship(4), // Battleship
-      new Ship(3), // Cruiser
-      new Ship(2), // Destroyer
-      new Ship(1), // Submarine
+      new Ship(3), // Cruiser 1
+      new Ship(3), // Cruiser 2
+      new Ship(2), // Destroyer 1
+      new Ship(2), // Destroyer 2
+      new Ship(2), // Destroyer 3
+      new Ship(1), // Submarine 1
+      new Ship(1), // Submarine 2
+      new Ship(1), // Submarine 3
+      new Ship(1), // Submarine 4
     ];
     const ships2 = [
       new Ship(4), // Battleship
-      new Ship(3), // Cruiser
-      new Ship(2), // Destroyer
-      new Ship(1), // Submarine
+      new Ship(3), // Cruiser 1
+      new Ship(3), // Cruiser 2
+      new Ship(2), // Destroyer 1
+      new Ship(2), // Destroyer 2
+      new Ship(2), // Destroyer 3
+      new Ship(1), // Submarine 1
+      new Ship(1), // Submarine 2
+      new Ship(1), // Submarine 3
+      new Ship(1), // Submarine 4
     ];
 
     // Place ships randomly for both players

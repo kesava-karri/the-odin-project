@@ -29,8 +29,33 @@ export default class GameboardUI {
     // Clear existing content
     boardElement.innerHTML = '';
 
-    // Create 10x10 grid
+    // Create column labels (A-J)
+    const colLabels = document.createElement('div');
+    colLabels.className = 'col-labels';
+    for (let i = 0; i < 10; i++) {
+      const label = document.createElement('div');
+      label.className = 'label';
+      label.textContent = String.fromCharCode(65 + i); // A-J
+      colLabels.appendChild(label);
+    }
+    boardElement.appendChild(colLabels);
+
+    // Create grid container
+    const gridContainer = document.createElement('div');
+    gridContainer.className = 'grid-container';
+
+    // Create row labels (1-10) and grid
     for (let row = 0; row < 10; row++) {
+      const rowContainer = document.createElement('div');
+      rowContainer.className = 'row-container';
+
+      // Add row label
+      const rowLabel = document.createElement('div');
+      rowLabel.className = 'label';
+      rowLabel.textContent = row + 1;
+      rowContainer.appendChild(rowLabel);
+
+      // Create cells for this row
       for (let col = 0; col < 10; col++) {
         const cell = document.createElement('div');
         cell.className = 'cell';
@@ -56,9 +81,11 @@ export default class GameboardUI {
           );
         }
 
-        boardElement.appendChild(cell);
+        rowContainer.appendChild(cell);
       }
+      gridContainer.appendChild(rowContainer);
     }
+    boardElement.appendChild(gridContainer);
   }
 
   handleCellClick(row, col) {
