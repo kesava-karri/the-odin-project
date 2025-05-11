@@ -1,5 +1,6 @@
-import Gameboard from './Gameboard';
-import { Direction, TileType } from './helper';
+import Gameboard from './Gameboard.js';
+import { Direction, TileType } from './helper.js';
+import Ship from './Ship.js';
 
 export default class Player {
   constructor(name = 'Player', isComputer = false) {
@@ -17,13 +18,12 @@ export default class Player {
       throw new Error('Can only attack another Player');
     }
 
-    opponent.gameboard.receiveAttack(row, col);
+    const wasHit = opponent.gameboard.receiveAttack(row, col);
+    return wasHit;
   }
 
   // Computer player methods
   placeShipsRandomly(ships) {
-    if (!this.isComputer) return;
-
     // Sort ships by length (largest first) to make placement easier
     const sortedShips = [...ships].sort((a, b) => b.length - a.length);
 
@@ -133,5 +133,30 @@ export default class Player {
 
   allShipsSunk() {
     return this.gameboard.ships.length > 0 && this.gameboard.allShipsSunk();
+  }
+
+  makeComputerMove(opponent) {
+    // Get all possible moves (coordinates that haven't been attacked)
+    const possibleMoves = [];
+    for (let row = 0; row < 10; row++) {
+      for (let col = 0; col < 10; col++) {
+        if (opponent.gameboard.attackGrid[row][col] === TileType.EMPTY) {
+          possibleMoves.push({ row, col });
+        }
+      }
+    }
+
+    // If no moves are available, return null
+    if (possibleMoves.length === 0) {
+      return null;
+    }
+
+    // Select a random move from possible moves
+    const randomIndex = Math.floor(Math.random() * possibleMoves.length);
+    const move = possibleMoves[randomIndex];
+
+    // Make the attack and return both the move and hit result
+    const wasHit = this.attack(opponent, move.row + 1, move.col + 1);
+    return { move, wasHit };
   }
 }

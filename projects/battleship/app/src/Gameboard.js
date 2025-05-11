@@ -6,7 +6,7 @@
  * Should report if all the ships have been sunk
  */
 
-import { create2DArray, fillInBuffer, Direction, TileType } from './helper';
+import { create2DArray, fillInBuffer, Direction, TileType } from './helper.js';
 
 export default class Gameboard {
   constructor() {
@@ -95,6 +95,11 @@ export default class Gameboard {
     const flag = false;
 
     while (counter++ < shipLen) {
+      // Check if row and col are within bounds
+      if (row < 0 || row >= 10 || col < 0 || col >= 10) {
+        return { row, col, flag: true };
+      }
+
       if (this.shipGrid[row][col] === TileType.SHIP) {
         return { row, col, flag: true };
       }
@@ -108,18 +113,21 @@ export default class Gameboard {
     const r = row - 1;
     const c = col - 1;
 
-    // Prevent attacking any position that has already been attacked (HIT or MISS)
+    // If position has already been attacked, return false (miss)
     if (this.attackGrid[r][c] !== TileType.EMPTY) {
-      throw new Error('This position has already been attacked');
+      return false;
     }
 
-    if (this.shipGrid[r][c] === TileType.SHIP) {
+    const wasHit = this.shipGrid[r][c] === TileType.SHIP;
+    if (wasHit) {
       this.attackGrid[r][c] = TileType.HIT;
       const ship = this.shipPositions.get(`${r},${c}`);
       if (ship) ship.hit();
     } else {
       this.attackGrid[r][c] = TileType.MISS;
     }
+
+    return wasHit;
   }
 
   toString() {

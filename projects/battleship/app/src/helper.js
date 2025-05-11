@@ -113,6 +113,11 @@ function print2DArray(arr) {
   }
 }
 
+export const GameMode = {
+  HUMAN_VS_COMPUTER: 'humanVsComputer',
+  HUMAN_VS_HUMAN: 'humanVsHuman',
+};
+
 export {
   create2DArray,
   fillInBuffer,
