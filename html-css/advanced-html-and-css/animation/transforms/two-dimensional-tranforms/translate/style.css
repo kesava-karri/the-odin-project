@@ -1,0 +1,22 @@
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.translateX {
+  transform: translateX(20px);
+}
+
+.translateY {
+  transform: translateY(-33%);
+}
+
+.translateXY {
+  transform: translate(20px, -33%);
+}
+
+div {
+  border: 2px solid black;
+  margin-right: auto;
+  padding: 24px;
+}

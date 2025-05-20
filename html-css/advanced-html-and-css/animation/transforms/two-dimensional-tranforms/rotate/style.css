@@ -1,0 +1,11 @@
+.rotate-by-deg {
+  transform: rotate(45deg);
+}
+
+.rotate-by-rad {
+  transform: rotate(-1rad);
+}
+
+.rotate-by-turn {
+  transform: rotate(0.3turn);
+}

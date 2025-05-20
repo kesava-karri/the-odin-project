@@ -1,0 +1,15 @@
+.scaleX {
+  transform: scaleX(0.25);
+}
+
+.scaleY {
+  transform: scaleY(1.5);
+}
+
+.scaleXY {
+  transform: scale(0.25, 1.5);
+}
+
+.scale {
+  transform: scale(0.5);
+}
