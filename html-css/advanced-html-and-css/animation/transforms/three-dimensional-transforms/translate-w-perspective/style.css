@@ -1,0 +1,11 @@
+.translate30 {
+  transform: perspective(100px) translateZ(30px);
+}
+
+.translate-100 {
+  transform: perspective(100px) translateZ(-1000px);
+}
+
+.translate-200 {
+  transform: perspective(100px) translateZ(-200px);
+}
