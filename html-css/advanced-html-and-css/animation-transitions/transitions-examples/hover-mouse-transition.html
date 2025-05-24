@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hover mouse transition</title>
+  </head>
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-content: center;
+    }
+
+    button {
+      background-color: rgb(231, 81, 81);
+      color:transparent;
+      border: 1px solid black;
+      border-radius: 6px;
+      padding: 10px 40px;
+      font-weight: 300;
+      font-size: medium;
+      /* transition shorthand */
+      /* transition: <property> <duration> <timing-function> <delay> <transition-behavior */
+      transition: background-color 1s ease-in-out 0.25s;
+    }
+
+    button:hover {
+      background-color:black;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+  <body>
+    <div id="transition-container">
+      <button>Transition!</button>
+      <p>Hover your mouse over the rectangle above!</p>
+    </div>
+  </body>
+</html>

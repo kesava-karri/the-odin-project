@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Move the ball to wherever you click</title>
+  </head>
+  <style>
+    .ball {
+      transition: transform 2s;
+      width: 100px;
+      height: 100px;
+      background-color:rosybrown;
+      border-radius: 50px;
+      position:absolute;
+      top: 0;
+      left: 0;
+    }
+
+    p {
+      text-align:center;
+    }
+  </style>
+  <body>
+    <p>Click anywhere to move the ball</p>
+    <div id="foo" class="ball"></div>
+
+    <script>
+      // Make the ball move to a certain position:
+      const f = document.getElementById("foo");
+      document.addEventListener("click", (ev) => {
+        f.style.transform = `translate(${ev.clientX - 50}px, ${ev.clientY - 50}px)`;
+      });
+    </script>
+  </body>
+</html>

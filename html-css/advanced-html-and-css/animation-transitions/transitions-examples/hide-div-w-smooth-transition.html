@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hide div w smooth transition</title>
+  </head>
+  <style>
+    div {
+      display: none;
+      opacity: 0;
+      transition:
+        display 1s allow-discrete,
+        opacity 1s;
+      /* wsad */
+      border: 3px solid palevioletred;
+      border-radius: 6px;
+      padding: 10px
+    }
+
+    .showing {
+      display: block;
+      opacity: 1;
+    }
+
+    @starting-style {
+      .showing {
+        opacity: 0;
+      }
+    }
+  </style>
+
+  <body>
+    <p>
+      Click anywhere on the screen or press any key to toggle the
+      <code>&lt;div&gt;</code> between hidden and showing.
+    </p>
+
+    <div>
+      This is a <code>&lt;div&gt;</code> element that transitions between
+      <code>display: none; opacity: 0</code> and
+      <code>display: block; opacity: 1</code>. Neat, huh?
+    </div>
+
+    <p>
+      This is another paragraph to show that <code>display: none;</code> is
+      being applied and removed on the above <code>&lt;div&gt; </code>. If only
+      its <code>opacity</code> was being changed, it would always take up the
+      space in the DOM.
+    </p>
+    <script>
+      // defer attribute is only for external scripts
+      const divElem = document.querySelector("div");
+      const HTMLElem = document.querySelector(":root");
+
+      HTMLElem.addEventListener("click", showHide)
+
+      function showHide() {
+        divElem.classList.toggle("showing");
+      }
+    </script>
+  </body>
+</html>
