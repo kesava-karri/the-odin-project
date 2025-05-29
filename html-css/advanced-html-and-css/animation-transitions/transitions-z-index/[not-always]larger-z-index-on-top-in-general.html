@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Larger z-index doesn't always win ; )</title>
+  </head>
+  <body>
+    <style>
+      header {
+        height: 60px;
+        line-height: 60px;
+        background: pink;
+        text-align: center;
+      }
+
+      main {
+        padding: 32px;
+      }
+
+      .tooltip {
+        top: -12px;
+        left: 0px;
+        right: 0px;
+        margin: 0 auto;
+        width: 90px;
+        text-align: center;
+        padding: 8px;
+        background: white;
+        box-shadow: 1px 2px 8px
+          hsla(0deg, 0%, 0%, 0.25);
+        border-radius: 6px;
+      }
+
+      header {
+        position: relative;
+        z-index: 2;
+      }
+      .tooltip {
+        position: absolute;
+        z-index: 999999;
+      }
+      main {
+        position: relative;
+        /* z-index: 1; */
+      }
+
+      body {
+        background: #eee;
+      }
+    </style>
+
+    <header>My Cool Site</header>
+    <main>
+      <div class="tooltip">A tooltip</div>
+      <p>Some main content</p>
+    </main>
+  </body>
+</html>

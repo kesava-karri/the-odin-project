@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>animation slide into view</title>
+    <style>
+      .container {
+        display: grid;
+        place-content: center;
+      }
+
+      .box {
+        background: rgba(62, 62, 232, 0.858);
+        height: 100px;
+        width: 100px;
+        border-radius: 6px;
+      }
+
+      .animate {
+        animation: slide-in 0.7s both;
+      }
+
+      @keyframes slide-in {
+        0% {
+          transform: translateX(-1000px);
+        }
+        100% {
+          transform: translateX(0px);
+        }
+
+      }
+
+      .rotate {
+        animation: rotate 1s both;
+      }
+
+      @keyframes rotate {
+        0% {
+          transform: rotate(0);
+        }
+        100% {
+          transform: rotate(1turn);
+        }
+      }
+
+      .resize {
+        animation: resize 1s both;
+      }
+
+      @keyframes resize {
+        50% {
+          transform: scale(0.5)
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .opacity {
+        animation: opacity 1s both;
+      }
+
+      @keyframes opacity {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <button class="btn">Animate</button>
+      <button class="btn-rotate">Rotate</button>
+      <button class="btn-resize">Resize</button>
+      <button class="btn-opacity">Show-Hide</button>
+    </p>
+    <div class="container">
+      <div class="box"></div>
+    </div>
+    <script>
+      const btn = document.querySelector(".btn");
+      const box = document.querySelector(".box");
+      const btnRotate = document.querySelector(".btn-rotate");
+      const btnResize = document.querySelector(".btn-resize");
+      const btnOpacity = document.querySelector(".btn-opacity");
+
+      btn.addEventListener("click", () => {
+        box.classList.add("animate");
+        box.addEventListener("animationend", () => {
+          box.classList.remove("animate");
+        });
+      });
+
+      btnRotate.addEventListener("click", () => {
+        box.classList.toggle("rotate");
+        box.addEventListener("animationend", () => {
+          box.classList.remove("rotate");
+        });
+      });
+
+      btnResize.addEventListener("click", (ev) => {
+        box.classList.toggle("resize");
+        box.addEventListener("animationend", () => {
+          box.classList.remove("resize");
+        });
+      });
+
+      btnOpacity.addEventListener("click", () => {
+        box.classList.toggle("opacity");
+        box.addEventListener("animationend", () => {
+          box.classList.remove("opacity");
+        });
+      });
+    </script>
+  </body>
+</html>
